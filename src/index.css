@@ -13,30 +13,47 @@
   }
 
   body {
-    background-color: #FCF9F8;
+    background-color: #FFF5F7;
     color: #1B1C1C;
   }
 }
 
 @layer components {
+  /* Primary button — deep rose/pink gradient */
   .btn-primary {
-    @apply bg-primary text-white h-12 rounded-button text-button font-semibold transition-all hover:bg-primary-600 active:bg-primary-700;
+    @apply h-12 rounded-2xl text-sm font-semibold text-white transition-all hover:opacity-90 active:scale-95 flex items-center justify-center gap-2;
+    background: linear-gradient(135deg, #C2185B, #AD2C4E);
   }
 
   .btn-secondary {
-    @apply bg-secondary text-white h-12 rounded-button text-button font-semibold transition-all hover:opacity-90 active:opacity-80;
+    @apply h-12 rounded-2xl text-sm font-semibold text-white transition-all hover:opacity-90 active:scale-95;
+    background: linear-gradient(135deg, #F06292, #C2185B);
   }
 
   .btn-outline {
-    @apply bg-transparent border-2 border-primary text-primary h-12 rounded-button text-button font-semibold transition-all hover:bg-primary hover:text-white;
+    @apply bg-transparent h-12 rounded-2xl text-sm font-semibold transition-all hover:bg-pink-50 active:scale-95;
+    border: 1.5px solid #AD2C4E;
+    color: #AD2C4E;
   }
 
+  /* Card — white with pink shadow */
   .card {
-    @apply bg-surface rounded-card shadow-card p-6;
+    background: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 2px 12px rgba(173, 44, 78, 0.08);
+    padding: 1.25rem;
   }
 
   .input {
-    @apply bg-surface border-2 border-border-input rounded-input h-12 px-4 text-text text-body transition-all focus:border-primary focus:outline-none;
+    @apply h-12 px-4 text-sm transition-all focus:outline-none;
+    background: #FFFFFF;
+    border: 2px solid #FFD6E0;
+    border-radius: 14px;
+    color: #1B1C1C;
+  }
+
+  .input:focus {
+    border-color: #AD2C4E;
   }
 }
 
@@ -54,9 +71,44 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  /* Safe area padding for bottom nav */
+  .pb-safe {
+    padding-bottom: max(88px, env(safe-area-inset-bottom, 88px));
+  }
+
+  /* Bottom nav safe area — used on page wrappers */
+  .bottom-nav-safe {
+    padding-bottom: max(88px, env(safe-area-inset-bottom, 88px));
+  }
 }
 
-/* Custom scrollbar */
+/* ─── Design Tokens ─────────────────────────────────────────────────────── */
+:root {
+  --color-bg:        #FFF5F7;
+  --color-surface:   #FFFFFF;
+  --color-primary:   #AD2C4E;
+  --color-primary-2: #C2185B;
+  --color-text:      #1B1C1C;
+  --color-muted:     #D4607A;
+  --color-border:    #FFD6E0;
+
+  --shadow-card:     0 2px 12px rgba(173, 44, 78, 0.08);
+  --shadow-soft:     0 4px 24px rgba(173, 44, 78, 0.14);
+
+  --radius-card:     20px;
+  --radius-button:   16px;
+
+  --bottom-nav-height: 72px;
+}
+
+/* ─── Bottom Nav ─────────────────────────────────────────────────────────── */
+/* Height definition used by the nav itself */
+.bottom-nav-height {
+  height: 72px;
+}
+
+/* ─── Custom Scrollbar ──────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -75,7 +127,7 @@
   background: #EB7A95;
 }
 
-/* Focus styles */
+/* ─── Focus Styles ──────────────────────────────────────────────────────── */
 button:focus-visible {
   outline: 2px solid #AD2C4E;
   outline-offset: 2px;
@@ -91,14 +143,18 @@ input:focus-visible {
   border-color: #AD2C4E;
 }
 
-/* Smooth transitions for interactive elements */
+/* ─── Smooth Transitions ────────────────────────────────────────────────── */
 button, a, input {
-  transition-property: background-color, border-color, color, opacity, box-shadow;
+  transition-property: background-color, border-color, color, opacity, box-shadow, transform;
   transition-duration: 150ms;
   transition-timing-function: ease-in-out;
 }
 
-/* Safe area for mobile bottom nav */
-.pb-safe {
-  padding-bottom: max(80px, env(safe-area-inset-bottom, 80px));
+/* ─── Hero gradient helper ──────────────────────────────────────────────── */
+.hero-gradient {
+  background: linear-gradient(135deg, #F06292, #AD2C4E);
+}
+
+.pink-gradient {
+  background: linear-gradient(135deg, #C2185B, #AD2C4E);
 }
