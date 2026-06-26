@@ -4,6 +4,7 @@ import WelcomePage from './pages/WelcomePage';
 import DashboardPage from './pages/DashboardPage';
 import UploadPage from './pages/UploadPage';
 import LetterPage from './pages/LetterPage';
+import AuthCallback from './pages/AuthCallback';
 import { ReactNode } from 'react';
 
 function PrivateRoute({ children }: { children: ReactNode }) {
@@ -48,6 +49,10 @@ function App() {
             }
           />
           <Route
+            path="/auth/callback"
+            element={<AuthCallback />}
+          />
+          <Route
             path="/dashboard"
             element={
               <PrivateRoute>
@@ -78,3 +83,4 @@ function App() {
 }
 
 export default App;
+

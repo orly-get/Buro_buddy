@@ -17,7 +17,7 @@ export interface Letter {
   original_text: string | null;
   status: 'pending' | 'processing' | 'completed' | 'failed';
   created_at: string;
-  category?: Category;
+  category?: Category | null;
 }
 
 export interface AISummary {
