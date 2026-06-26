@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'http://localhost:5173/auth/callback',
+        redirectTo: window.location.origin + '/auth/callback',
       },
     });
   };
