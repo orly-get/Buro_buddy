@@ -87,7 +87,7 @@ Deno.serve(async (req: Request) => {
 - סיווג נכון של סוג המכתב.`;
 
     const openRouterPayload = {
-      model: "google/gemini-2.0-flash-exp:free",
+      models: ["nvidia/nemotron-nano-12b-v2-vl:free", "google/gemma-4-31b-it:free"],
       messages: [
         {
           role: "user",
