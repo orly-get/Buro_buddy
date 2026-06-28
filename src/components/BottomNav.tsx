@@ -7,7 +7,7 @@ export default function BottomNav() {
     { path: '/dashboard', icon: 'home_app_logo', label: 'בית' },
     { path: '/letters', icon: 'history_edu', label: 'המכתבים שלי' },
     { path: '/tasks', icon: 'checklist', label: 'משימות', activePath: '/dashboard' },
-    { path: '/profile', icon: 'person', label: 'פרופיל', activePath: '/dashboard' },
+    { path: '/profile', icon: 'person', label: 'פרופיל' },
   ];
 
   // Determine which tab should be visually active

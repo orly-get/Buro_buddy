@@ -5,6 +5,7 @@ import DashboardPage from './pages/DashboardPage';
 import LettersPage from './pages/LettersPage';
 import UploadPage from './pages/UploadPage';
 import LetterPage from './pages/LetterPage';
+import ProfilePage from './pages/ProfilePage';
 import AuthCallback from './pages/AuthCallback';
 import { ReactNode } from 'react';
 
@@ -82,6 +83,14 @@ function App() {
             element={
               <PrivateRoute>
                 <LetterPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <ProfilePage />
               </PrivateRoute>
             }
           />
