@@ -117,47 +117,7 @@ export default function DashboardPage() {
           <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-secondary-container/20 rounded-full blur-2xl"></div>
         </section>
 
-        {/* Quick Help Section */}
-        <section>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="font-h2 text-h2 text-on-surface">עזרה מהירה</h2>
-            <span className="font-caption text-primary font-bold">הצג הכל</span>
-          </div>
-          {/* Asymmetric Bento Grid */}
-          <div className="grid grid-cols-2 gap-4">
-            {/* Large Card */}
-            <button className="col-span-2 flex items-center gap-4 p-4 bg-white rounded-2xl shadow-[0_8px_20px_rgba(255,107,138,0.08)] border border-pink-50 text-right active:scale-[0.98] transition-all">
-              <div className="w-12 h-12 bg-secondary-fixed rounded-xl flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined text-on-secondary-container" style={{ fontVariationSettings: "'FILL' 1" }}>payments</span>
-              </div>
-              <div className="flex-1">
-                <h3 className="font-button text-on-surface">מה החשבון הזה?</h3>
-                <p className="font-body-sm text-on-surface-variant">פירוט עלויות מיידי</p>
-              </div>
-              <span className="material-symbols-outlined text-outline rotate-180">chevron_right</span>
-            </button>
-            {/* Small Card 1 */}
-            <button className="flex flex-col gap-2 p-4 bg-white rounded-2xl shadow-[0_8px_20px_rgba(255,107,138,0.08)] border border-pink-50 text-right active:scale-[0.98] transition-all">
-              <div className="w-10 h-10 bg-tertiary-fixed rounded-lg flex items-center justify-center">
-                <span className="material-symbols-outlined text-on-tertiary-fixed-variant" style={{ fontVariationSettings: "'FILL' 1" }}>event_busy</span>
-              </div>
-              <div>
-                <h3 className="font-button text-on-surface leading-tight">מתי הדדליין?</h3>
-                <p className="font-caption text-on-surface-variant mt-1">מעקב אחר תאריכי יעד</p>
-              </div>
-            </button>
-            {/* Small Card 2 */}
-            <button className="flex flex-col gap-2 p-4 bg-white rounded-2xl shadow-[0_8px_20px_rgba(255,107,138,0.08)] border border-pink-50 text-right active:scale-[0.98] transition-all">
-              <div className="w-10 h-10 bg-primary-fixed rounded-lg flex items-center justify-center">
-                <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>edit_note</span>
-              </div>
-              <div>
-                <h3 className="font-button text-on-surface leading-tight">עזרו לי להגיב</h3>
-                <p className="font-caption text-on-surface-variant mt-1">מחולל טיוטות AI</p>
-              </div>
-            </button>
-          </div>
-        </section>
+
 
         {/* Recent Activity Section */}
         <section className="mb-8">
