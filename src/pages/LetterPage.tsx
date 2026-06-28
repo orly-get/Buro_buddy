@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { LetterWithDetails } from '../types';
-import { FileText, ArrowRight, Calendar, CheckCircle, Circle, Loader2, AlertCircle, Trash2, Copy } from 'lucide-react';
 import BottomNav from '../components/BottomNav';
 
 export default function LetterPage() {
@@ -125,7 +124,7 @@ export default function LetterPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background pb-safe" dir="rtl">
         <div className="text-center">
-          <AlertCircle className="w-16 h-16 text-primary-300 mx-auto mb-4" />
+          <span className="material-symbols-outlined text-6xl text-primary-300 mb-4">error</span>
           <h1 className="text-h1 text-text mb-2">מכתב לא נמצא</h1>
           <Link to="/dashboard" className="text-body text-primary hover:underline">
             חזרה לדאשבורד
@@ -135,151 +134,178 @@ export default function LetterPage() {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-background pb-safe" dir="rtl">
-      <header className="bg-surface border-b border-primary-100 sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-5 py-4 flex items-center justify-between">
-          <Link
-            to="/dashboard"
-            className="flex items-center gap-2 text-primary-400 hover:text-primary transition-colors"
-          >
-            <ArrowRight className="w-5 h-5" />
-            <span className="text-body hidden sm:inline">חזרה</span>
-          </Link>
+  // Determine if there is any urgent pending task (due within 7 days)
+  const hasUrgentTask = tasks.some(t => {
+    if (t.is_completed || !t.due_date) return false;
+    const due = new Date(t.due_date);
+    const diffDays = Math.ceil((due.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
+    return diffDays <= 7;
+  });
 
-          <button
-            onClick={deleteLetter}
-            disabled={deleting}
-            className="flex items-center gap-2 text-primary-400 hover:text-error transition-colors"
-          >
-            <Trash2 className="w-5 h-5" />
-            <span className="text-body hidden sm:inline">מחק</span>
-          </button>
+  return (
+    <div className="min-h-screen bg-background pb-32 flex flex-col font-body-lg text-on-surface" dir="rtl">
+      {/* TopAppBar with integrated Back and Delete buttons */}
+      <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] flex justify-between items-center px-4 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
+        <Link to="/dashboard" className="w-10 h-10 flex items-center justify-center rounded-xl text-primary hover:bg-pink-50 transition-colors active:scale-95">
+          <span className="material-symbols-outlined">arrow_forward</span>
+        </Link>
+        
+        <div className="flex items-center gap-2">
+          <span className="text-xl font-black text-pink-500 italic">BuroBuddy</span>
         </div>
+
+        <button 
+          onClick={deleteLetter}
+          disabled={deleting}
+          className="w-10 h-10 flex items-center justify-center rounded-xl text-error hover:bg-error/10 transition-colors active:scale-95"
+        >
+          <span className="material-symbols-outlined">delete</span>
+        </button>
       </header>
 
-      <main className="max-w-2xl mx-auto px-5 py-6">
+      <main className="flex-1 px-5 py-6 space-y-6 max-w-2xl mx-auto w-full">
+        
+        {/* Processing State Indicator */}
         {letter.status === 'processing' && (
-          <div className="card bg-primary-50 border border-primary-100 mb-6 flex items-center gap-4">
-            <Loader2 className="w-6 h-6 text-primary animate-spin" />
-            <div>
-              <h3 className="text-h2 text-primary">מנתח את המכתב...</h3>
-              <p className="text-body text-primary-400">הבינה המלאכותית מעבדת את המסמך</p>
+          <div className="space-y-2">
+            <div className="flex justify-between items-center px-1">
+              <span className="font-caption text-on-surface-variant">התקדמות עיבוד המכתב</span>
+              <span className="font-caption text-primary font-bold">מעבד...</span>
+            </div>
+            <div className="w-full h-3 bg-secondary-fixed rounded-full overflow-hidden">
+              <div className="h-full bg-primary w-1/2 rounded-full animate-pulse"></div>
             </div>
           </div>
         )}
 
         {letter.status === 'failed' && (
-          <div className="card bg-error/5 border border-error/20 mb-6 flex items-center gap-4">
-            <AlertCircle className="w-6 h-6 text-error" />
-            <div>
-              <h3 className="text-h2 text-error">שגיאה בניתוח</h3>
-              <p className="text-body text-error/80">אירעה שגיאה בעיבוד המכתב</p>
+          <div className="flex justify-between items-center bg-error-container/30 px-4 py-2 rounded-2xl border border-error/10">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-error" style={{ fontVariationSettings: "'FILL' 1" }}>error</span>
+              <span className="font-caption text-error font-bold uppercase">שגיאה בניתוח</span>
             </div>
+            <span className="font-h2 text-error">אירעה שגיאה</span>
           </div>
         )}
 
-        <div className="flex items-center gap-4 mb-6">
-          <div className="w-14 h-14 bg-primary rounded-xl flex items-center justify-center">
-            <FileText className="w-7 h-7 text-white" />
+        {/* Urgent Tag (Only shows if a task is due soon) */}
+        {hasUrgentTask && letter.status === 'completed' && (
+          <div className="flex justify-between items-center bg-error-container/30 px-4 py-2 rounded-2xl border border-error/10">
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-error" style={{ fontVariationSettings: "'FILL' 1" }}>error</span>
+              <span className="font-caption text-error font-bold uppercase">מועד אחרון דחוף</span>
+            </div>
+            <span className="font-h2 text-error">שים לב!</span>
           </div>
-          <div>
-            <p className="text-body text-primary-400">{formatDate(letter.created_at)}</p>
-            {letter.category && (
-              <span className="text-caption bg-primary-100 text-primary px-2 py-0.5 rounded-full">
-                {letter.category.name}
-              </span>
+        )}
+
+        {/* BuroBuddy AI Bubble */}
+        {summary && (
+          <section className="space-y-2">
+            <div className="flex items-end gap-3">
+              <div className="w-12 h-12 bg-primary-container rounded-2xl flex items-center justify-center shadow-lg shrink-0">
+                <span className="material-symbols-outlined text-white text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>smart_toy</span>
+              </div>
+              <div className="bg-white p-4 rounded-t-3xl rounded-bl-3xl shadow-[0_10px_30px_rgba(255,107,138,0.1)] border border-pink-50 relative w-full">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="font-h2 text-primary">BuroBuddy אומר</span>
+                    <span className="bg-tertiary-container/20 text-tertiary text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">סיכום AI</span>
+                  </div>
+                  <button 
+                    onClick={() => copyToClipboard(summary.summary_text)}
+                    className="flex items-center gap-1 text-primary-400 hover:text-primary transition-colors active:scale-95"
+                  >
+                    <span className="material-symbols-outlined text-[16px]">content_copy</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider">{copied ? 'הועתק!' : 'העתק'}</span>
+                  </button>
+                </div>
+                <p className="font-body-lg text-on-surface leading-relaxed whitespace-pre-wrap">
+                  {summary.summary_text}
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        <h1 className="font-h1 text-on-surface px-1">{letter.category?.name || 'פירוט המכתב'}</h1>
+        <p className="font-caption text-on-surface-variant px-1 -mt-4">{formatDate(letter.created_at)}</p>
+
+        {/* Scanned Letter Visual Placeholder */}
+        <div className="relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-pink-100 to-rose-100 rounded-[20px] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+          <div className="relative bg-white p-2 rounded-2xl shadow-sm border border-pink-50 overflow-hidden">
+            <div className="w-full h-48 bg-surface-container flex items-center justify-center rounded-xl opacity-80 group-hover:opacity-100 transition-all duration-500">
+              <span className="material-symbols-outlined text-primary text-6xl opacity-30" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent"></div>
+            {letter.original_text && (
+              <button 
+                onClick={() => alert("הטקסט המקורי מוצג בתחתית העמוד")}
+                className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-pink-100 flex items-center gap-2 hover:bg-white transition-all"
+              >
+                <span className="material-symbols-outlined text-primary text-sm">zoom_in</span>
+                <span className="font-button text-primary text-sm">צפה במקור</span>
+              </button>
             )}
           </div>
         </div>
 
-        {summary && (
-          <section className="card mb-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-h2 text-text">תקציר המכתב</h2>
-              <button
-                onClick={() => copyToClipboard(summary.summary_text)}
-                className="flex items-center gap-2 text-caption text-primary-400 hover:text-primary transition-colors"
-              >
-                <Copy className="w-4 h-4" />
-                {copied ? 'הועתק!' : 'העתק'}
-              </button>
+        {/* Key Action Items Card */}
+        <section className="bg-white rounded-[32px] p-6 shadow-[0_20px_50px_rgba(255,107,138,0.08)] border border-pink-50 space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+              <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>checklist</span>
             </div>
-            <p className="text-body text-text leading-relaxed whitespace-pre-wrap">
-              {summary.summary_text}
-            </p>
-          </section>
-        )}
-
-        <section className="card">
-          <h2 className="text-h2 text-text mb-4">
-            משימות ({completedTasks}/{tasks.length})
-          </h2>
-
-          {tasks.length === 0 ? (
-            <p className="text-body text-primary-400 text-center py-8">
-              {letter.status === 'completed'
-                ? 'לא זוהו משימות במכתב זה'
-                : 'המשימות יופיעו לאחר הניתוח'}
-            </p>
-          ) : (
-            <div className="space-y-3">
-              {tasks.map((task) => {
+            <h2 className="font-h1 text-on-surface">פעולות לביצוע ({completedTasks}/{tasks.length})</h2>
+          </div>
+          
+          <div className="space-y-4">
+            {tasks.length === 0 ? (
+              <p className="font-body-sm text-on-surface-variant text-center py-6">
+                {letter.status === 'completed'
+                  ? 'לא זוהו משימות במכתב זה'
+                  : 'המשימות יופיעו לאחר הניתוח'}
+              </p>
+            ) : (
+              tasks.map((task) => {
                 const dueStatus = getDueDateStatus(task.due_date);
-
                 return (
-                  <div
-                    key={task.id}
-                    className={`rounded-xl border p-4 transition-all ${
-                      task.is_completed
-                        ? 'bg-success/5 border-success/20'
-                        : 'bg-surface border-primary-100'
-                    }`}
-                  >
-                    <div className="flex items-start gap-3">
-                      <button
-                        onClick={() => toggleTask(task.id, task.is_completed)}
-                        className="mt-0.5 flex-shrink-0"
-                      >
-                        {task.is_completed ? (
-                          <CheckCircle className="w-6 h-6 text-success" />
-                        ) : (
-                          <Circle className="w-6 h-6 text-primary-300 hover:text-primary-400" />
-                        )}
-                      </button>
-                      <div className="flex-1 min-w-0">
-                        <p
-                          className={`text-body ${
-                            task.is_completed ? 'line-through text-primary-400' : 'text-text'
-                          }`}
-                        >
-                          {task.task_description}
-                        </p>
-                        {task.due_date && dueStatus && !task.is_completed && (
-                          <div
-                            className={`inline-flex items-center gap-1.5 mt-2 text-caption px-2 py-1 rounded-full border ${dueStatus.color}`}
-                          >
-                            <Calendar className="w-3.5 h-3.5" />
-                            {dueStatus.text}
-                          </div>
-                        )}
-                      </div>
+                  <label key={task.id} className="flex items-start gap-4 p-4 rounded-2xl bg-surface-container-low hover:bg-pink-50 transition-colors cursor-pointer group">
+                    <div className="relative flex items-center justify-center mt-1">
+                      <input 
+                        type="checkbox" 
+                        checked={task.is_completed}
+                        onChange={() => toggleTask(task.id, task.is_completed)}
+                        className="peer appearance-none w-6 h-6 rounded-lg border-2 border-pink-200 checked:bg-primary checked:border-primary transition-all duration-200" 
+                      />
+                      <span className="material-symbols-outlined absolute text-white text-[18px] opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none">check</span>
                     </div>
-                  </div>
+                    <div className="flex-1">
+                      <p className="font-h2 text-on-surface group-peer-checked:line-through">{task.task_description}</p>
+                      {task.due_date && dueStatus && !task.is_completed && (
+                        <p className={`font-body-sm mt-1 inline-flex rounded-full px-2 py-0.5 border ${dueStatus.color}`}>
+                          {dueStatus.text}
+                        </p>
+                      )}
+                    </div>
+                  </label>
                 );
-              })}
-            </div>
-          )}
+              })
+            )}
+          </div>
         </section>
 
         {letter.original_text && (
-          <details className="card mt-6 group">
-            <summary className="cursor-pointer flex items-center justify-between text-h2 text-text hover:text-primary transition-colors">
-              טקסט מקורי
-              <span className="text-caption text-primary-400 group-open:hidden">לחץ להצגה</span>
-              <span className="text-caption text-primary-400 hidden group-open:inline">לחץ להסתרה</span>
+          <details className="bg-white rounded-2xl p-6 shadow-[0_10px_30px_rgba(255,107,138,0.08)] border border-pink-50 group">
+            <summary className="cursor-pointer flex items-center justify-between font-h2 text-on-surface hover:text-primary transition-colors outline-none list-none">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-primary">text_snippet</span>
+                טקסט מקורי סרוק
+              </div>
+              <span className="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
             </summary>
-            <p className="text-body text-primary-400 whitespace-pre-wrap border-t border-primary-100 pt-4 mt-4">
+            <p className="font-body-sm text-on-surface-variant whitespace-pre-wrap border-t border-pink-100 pt-4 mt-4 leading-relaxed">
               {letter.original_text}
             </p>
           </details>
