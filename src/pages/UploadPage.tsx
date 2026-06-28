@@ -89,9 +89,11 @@ export default function UploadPage() {
 
       const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://mtwlmvstxemicebioxdn.supabase.co';
 
-      const payload = selectedFile.type.startsWith('image/')
-        ? { text: `תמונה של מכתב רשמי שהועלתה למערכת. שם הקובץ: ${selectedFile.name}. נתח את המכתב וספק תקציר ומשימות לפי הפורמט הנדרש.`, mimeType: selectedFile.type }
-        : { text: `מסמך PDF שהועלה למערכת. שם הקובץ: ${selectedFile.name}. נתח את המכתב וספק תקציר ומשימות לפי הפורמט הנדרש.` };
+      const payload = {
+        file_url: publicUrl,
+        mimeType: selectedFile.type,
+        file_name: selectedFile.name
+      };
 
       const response = await fetch(
         `${supabaseUrl}/functions/v1/analyze-letter`,
