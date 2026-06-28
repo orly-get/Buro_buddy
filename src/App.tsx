@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import WelcomePage from './pages/WelcomePage';
 import DashboardPage from './pages/DashboardPage';
+import LettersPage from './pages/LettersPage';
 import UploadPage from './pages/UploadPage';
 import LetterPage from './pages/LetterPage';
 import AuthCallback from './pages/AuthCallback';
@@ -57,6 +58,14 @@ function App() {
             element={
               <PrivateRoute>
                 <DashboardPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/letters"
+            element={
+              <PrivateRoute>
+                <LettersPage />
               </PrivateRoute>
             }
           />
