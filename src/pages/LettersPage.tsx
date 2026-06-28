@@ -137,7 +137,7 @@ export default function LettersPage() {
                       {letter.status === 'completed' ? 'check_circle' : 'calendar_today'}
                     </span>
                     <span className="font-caption text-caption">
-                      {letter.status === 'completed' ? \`הושלם ב-\${formatDate(letter.created_at)}\` : formatDate(letter.created_at)}
+                      {letter.status === 'completed' ? `הושלם ב-${formatDate(letter.created_at)}` : formatDate(letter.created_at)}
                     </span>
                   </div>
                 </div>
