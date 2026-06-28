@@ -6,7 +6,7 @@ export default function BottomNav() {
   const navItems = [
     { path: '/dashboard', icon: 'home_app_logo', label: 'בית' },
     { path: '/letters', icon: 'history_edu', label: 'המכתבים שלי' },
-    { path: '/tasks', icon: 'checklist', label: 'משימות', activePath: '/dashboard' },
+    { path: '/upload', icon: 'document_scanner', label: 'סריקה' },
     { path: '/profile', icon: 'person', label: 'פרופיל' },
   ];
 
@@ -15,7 +15,7 @@ export default function BottomNav() {
     if (location.pathname === '/dashboard') return '/dashboard';
     if (location.pathname.startsWith('/letter')) return '/letters';
     if (location.pathname === '/letters') return '/letters';
-    if (location.pathname === '/tasks') return '/tasks';
+    if (location.pathname === '/upload') return '/upload';
     if (location.pathname === '/profile') return '/profile';
     return '/dashboard';
   };
@@ -23,7 +23,7 @@ export default function BottomNav() {
   const activeTab = getActiveTab();
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full z-[999] flex justify-around items-center px-2 pb-8 pt-3 bg-white/95 backdrop-blur-lg rounded-t-[32px] border-t border-pink-100 shadow-[0_-10px_40px_rgba(255,107,138,0.15)]">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] z-[999] flex justify-around items-center px-2 pb-8 pt-3 bg-white/95 backdrop-blur-lg rounded-t-[32px] border-t border-pink-100 shadow-[0_-10px_40px_rgba(255,107,138,0.15)]">
       {navItems.map((item) => {
         const tabActive = activeTab === item.path;
         // /tasks, /profile navigate to /dashboard since they're placeholders

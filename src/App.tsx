@@ -39,64 +39,68 @@ function PublicRoute({ children }: { children: ReactNode }) {
 
 function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <PublicRoute>
-                <WelcomePage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/auth/callback"
-            element={<AuthCallback />}
-          />
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <DashboardPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/letters"
-            element={
-              <PrivateRoute>
-                <LettersPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/upload"
-            element={
-              <PrivateRoute>
-                <UploadPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/letter/:id"
-            element={
-              <PrivateRoute>
-                <LetterPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <PrivateRoute>
-                <ProfilePage />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+    <div className="min-h-screen bg-gray-100 flex justify-center">
+      <div className="w-full max-w-[430px] bg-background relative shadow-2xl overflow-x-hidden min-h-screen">
+        <AuthProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <PublicRoute>
+                    <WelcomePage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/auth/callback"
+                element={<AuthCallback />}
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <PrivateRoute>
+                    <DashboardPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/letters"
+                element={
+                  <PrivateRoute>
+                    <LettersPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/upload"
+                element={
+                  <PrivateRoute>
+                    <UploadPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/letter/:id"
+                element={
+                  <PrivateRoute>
+                    <LetterPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <PrivateRoute>
+                    <ProfilePage />
+                  </PrivateRoute>
+                }
+              />
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
+      </div>
+    </div>
   );
 }
 
