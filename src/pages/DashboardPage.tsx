@@ -89,8 +89,12 @@ export default function DashboardPage() {
           </div>
           <span className="text-2xl font-black text-pink-500 italic">BuroBuddy</span>
         </div>
-        <button className="w-10 h-10 flex items-center justify-center rounded-xl bg-pink-50 text-pink-500 hover:bg-pink-100 transition-colors active:scale-95 duration-200">
-          <span className="material-symbols-outlined">notifications</span>
+        <button 
+          onClick={signOut}
+          className="w-10 h-10 flex items-center justify-center rounded-xl bg-pink-50 text-pink-500 hover:bg-pink-100 hover:text-error transition-colors active:scale-95 duration-200"
+          title="התנתק"
+        >
+          <span className="material-symbols-outlined">logout</span>
         </button>
       </header>
 
