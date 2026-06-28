@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Letter, Category } from '../types';
-import { FileText, Plus, Clock, CheckCircle, AlertCircle, LogOut, Upload } from 'lucide-react';
 import BottomNav from '../components/BottomNav';
 
 interface LetterWithCategory extends Letter {
@@ -15,6 +14,11 @@ export default function DashboardPage() {
   const navigate = useNavigate();
   const [letters, setLetters] = useState<LetterWithCategory[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Extract first name safely, fallback to 'חבר' (Friend) if undefined
+  const firstName = user?.user_metadata?.full_name?.split(' ')[0] 
+    || user?.email?.split('@')[0] 
+    || 'חבר';
 
   useEffect(() => {
     if (user) {
@@ -38,34 +42,16 @@ export default function DashboardPage() {
     }
   }
 
-  const handleSignOut = async () => {
-    await signOut();
-    navigate('/');
-  };
-
-  const getStatusIcon = (status: Letter['status']) => {
-    switch (status) {
-      case 'completed':
-        return <CheckCircle className="w-5 h-5 text-success" />;
-      case 'processing':
-        return <div className="w-5 h-5 border-2 border-primary border-t-primary-400 rounded-full animate-spin" />;
-      case 'failed':
-        return <AlertCircle className="w-5 h-5 text-error" />;
-      default:
-        return <Clock className="w-5 h-5 text-primary-300" />;
-    }
-  };
-
   const getStatusText = (status: Letter['status']) => {
     switch (status) {
       case 'completed':
-        return 'הושלם';
+        return 'טופל';
       case 'processing':
         return 'מעבד...';
       case 'failed':
         return 'שגיאה';
       default:
-        return 'ממתין';
+        return 'נדרש טיפול';
     }
   };
 
@@ -73,7 +59,7 @@ export default function DashboardPage() {
     const date = new Date(dateStr);
     return date.toLocaleDateString('he-IL', {
       year: 'numeric',
-      month: 'short',
+      month: 'long',
       day: 'numeric',
     });
   };
@@ -86,117 +72,134 @@ export default function DashboardPage() {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-background pb-safe" dir="rtl">
-      <header className="bg-surface border-b border-primary-100 sticky top-0 z-10 hidden md:block">
-        <div className="max-w-4xl mx-auto px-5 py-4 flex items-center justify-between">
-          <Link to="/dashboard" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
-              <FileText className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-h2 text-text">BuroBuddy</span>
-          </Link>
+  // Get only the most recent 3 letters
+  const recentLetters = letters.slice(0, 3);
 
-          <div className="flex items-center gap-4">
-            <span className="text-body text-primary-400">
-              {user?.email}
-            </span>
-            <button
-              onClick={handleSignOut}
-              className="btn-outline flex items-center gap-2"
-            >
-              <LogOut className="w-5 h-5" />
-              התנתק
-            </button>
+  return (
+    <div className="bg-background text-on-surface min-h-screen pb-32" dir="rtl">
+      {/* TopAppBar */}
+      <header className="flex justify-between items-center px-6 py-4 w-full sticky top-0 z-50 bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] rounded-b-[32px]">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container bg-surface-container">
+            <img 
+              alt="פרופיל משתמש" 
+              className="w-full h-full object-cover scale-150" 
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGKdpXtcpX86zfVi7qNTaz1VKkAakAo8WFbTosIHBA2RoE14ILQuKd6DIKvpw_IoGydAWTmhkvsDG3Vx2znYsLIBftxTBsjdbK9fCHeUIpb4OwueTCrvAlqUwheFHof41fXAilM1OM4G--rkOPgU2VStioo5WL-TgqTm8fxd37fLFqMwG0lc3NH6it4wOQzrc3he6xnIi9R2EEmP_w0WXLZq2_tfxSHSnnCvSXDYEthsp1C_9bN0tHhtRauA9EGiaveqGEWLNdGIU" 
+            />
           </div>
+          <span className="text-2xl font-black text-pink-500 italic">BuroBuddy</span>
         </div>
+        <button className="w-10 h-10 flex items-center justify-center rounded-xl bg-pink-50 text-pink-500 hover:bg-pink-100 transition-colors active:scale-95 duration-200">
+          <span className="material-symbols-outlined">notifications</span>
+        </button>
       </header>
 
-      <main className="max-w-4xl mx-auto px-5 py-6">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-h1 text-text">המכתבים שלי</h1>
-            <p className="text-body text-primary-400 mt-1">נהל את המכתבים הבירוקרטיים שלך</p>
-          </div>
-
-          <Link
-            to="/upload"
-            className="btn-primary flex items-center gap-2 hidden md:flex"
-          >
-            <Plus className="w-5 h-5" />
-            העלה מכתב חדש
-          </Link>
-        </div>
-
-        {letters.length === 0 ? (
-          <div className="card text-center py-12">
-            <div className="w-20 h-20 bg-primary-50 rounded-card flex items-center justify-center mx-auto mb-6">
-              <Upload className="w-10 h-10 text-primary-300" />
-            </div>
-            <h2 className="text-h2 text-text mb-2">
-              אין לך מכתבים עדיין
-            </h2>
-            <p className="text-body text-primary-400 mb-6">
-              התחל בהעלאת המכתב הראשון שלך
-            </p>
-            <Link to="/upload" className="btn-primary inline-flex items-center gap-2">
-              <Upload className="w-5 h-5" />
-              העלה מכתב חדש
+      <main className="px-5 pt-6 flex flex-col gap-6 max-w-4xl mx-auto">
+        {/* Hero Section: Scan Letter */}
+        <section className="relative overflow-hidden rounded-[32px] bg-white p-6 shadow-[0_10px_40px_rgba(255,107,138,0.1)] border border-pink-50">
+          <div className="relative z-10">
+            <h1 className="font-h1 text-h1 text-on-surface mb-1">שלום {firstName}, טוב לראות אותך</h1>
+            <p className="font-body-sm text-body-sm text-on-surface-variant mb-6">מוכן לטפל בניירת שלך היום?</p>
+            <Link 
+              to="/upload" 
+              className="group w-full h-[180px] bg-primary-container rounded-3xl flex flex-col items-center justify-center gap-2 text-on-primary shadow-[0_20px_50px_rgba(255,107,138,0.3)] active:scale-[0.98] transition-all duration-200"
+              style={{ textDecoration: 'none' }}
+            >
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-1">
+                <span className="material-symbols-outlined text-[40px]" style={{ fontVariationSettings: "'FILL' 1" }}>document_scanner</span>
+              </div>
+              <span className="font-button text-h2">סריקת מכתב</span>
+              <span className="font-caption text-white/80">הבינה המלאכותית תטפל בכל השאר</span>
             </Link>
           </div>
-        ) : (
-          <div className="grid gap-4">
-            {letters.map((letter) => (
-              <Link
-                key={letter.id}
-                to={`/letter/${letter.id}`}
-                className="card hover:shadow-soft transition-shadow group"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <FileText className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        {letter.category && (
-                          <span className="text-caption bg-primary-100 text-primary px-2 py-0.5 rounded-full">
-                            {letter.category.name}
-                          </span>
-                        )}
-                        <span className="text-caption text-primary-300">
-                          {formatDate(letter.created_at)}
-                        </span>
-                      </div>
-                      <p className="text-body text-text line-clamp-2">
-                        {letter.original_text
-                          ? letter.original_text.substring(0, 100) + '...'
-                          : 'מכתב חדש'}
-                      </p>
-                    </div>
-                  </div>
+          {/* Decorative abstract shapes */}
+          <div className="absolute -top-10 -left-10 w-40 h-40 bg-primary-container/10 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-secondary-container/20 rounded-full blur-2xl"></div>
+        </section>
 
-                  <div className="flex items-center gap-2 ml-4">
-                    {getStatusIcon(letter.status)}
-                    <span className="text-caption text-primary-400 hidden sm:inline">
-                      {getStatusText(letter.status)}
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+        {/* Quick Help Section */}
+        <section>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-h2 text-h2 text-on-surface">עזרה מהירה</h2>
+            <span className="font-caption text-primary font-bold">הצג הכל</span>
           </div>
-        )}
+          {/* Asymmetric Bento Grid */}
+          <div className="grid grid-cols-2 gap-4">
+            {/* Large Card */}
+            <button className="col-span-2 flex items-center gap-4 p-4 bg-white rounded-2xl shadow-[0_8px_20px_rgba(255,107,138,0.08)] border border-pink-50 text-right active:scale-[0.98] transition-all">
+              <div className="w-12 h-12 bg-secondary-fixed rounded-xl flex items-center justify-center shrink-0">
+                <span className="material-symbols-outlined text-on-secondary-container" style={{ fontVariationSettings: "'FILL' 1" }}>payments</span>
+              </div>
+              <div className="flex-1">
+                <h3 className="font-button text-on-surface">מה החשבון הזה?</h3>
+                <p className="font-body-sm text-on-surface-variant">פירוט עלויות מיידי</p>
+              </div>
+              <span className="material-symbols-outlined text-outline rotate-180">chevron_right</span>
+            </button>
+            {/* Small Card 1 */}
+            <button className="flex flex-col gap-2 p-4 bg-white rounded-2xl shadow-[0_8px_20px_rgba(255,107,138,0.08)] border border-pink-50 text-right active:scale-[0.98] transition-all">
+              <div className="w-10 h-10 bg-tertiary-fixed rounded-lg flex items-center justify-center">
+                <span className="material-symbols-outlined text-on-tertiary-fixed-variant" style={{ fontVariationSettings: "'FILL' 1" }}>event_busy</span>
+              </div>
+              <div>
+                <h3 className="font-button text-on-surface leading-tight">מתי הדדליין?</h3>
+                <p className="font-caption text-on-surface-variant mt-1">מעקב אחר תאריכי יעד</p>
+              </div>
+            </button>
+            {/* Small Card 2 */}
+            <button className="flex flex-col gap-2 p-4 bg-white rounded-2xl shadow-[0_8px_20px_rgba(255,107,138,0.08)] border border-pink-50 text-right active:scale-[0.98] transition-all">
+              <div className="w-10 h-10 bg-primary-fixed rounded-lg flex items-center justify-center">
+                <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>edit_note</span>
+              </div>
+              <div>
+                <h3 className="font-button text-on-surface leading-tight">עזרו לי להגיב</h3>
+                <p className="font-caption text-on-surface-variant mt-1">מחולל טיוטות AI</p>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        {/* Recent Activity Section */}
+        <section className="mb-8">
+          <h2 className="font-h2 text-h2 text-on-surface mb-4">מכתבים אחרונים</h2>
+          
+          <div className="space-y-4">
+            {recentLetters.length === 0 ? (
+              <div className="bg-white p-6 rounded-2xl border border-pink-50 shadow-[0_4px_15px_rgba(255,107,138,0.05)] text-center">
+                <p className="font-body-sm text-on-surface-variant">אין מכתבים להצגה</p>
+              </div>
+            ) : (
+              recentLetters.map((letter) => (
+                <Link 
+                  to={`/letter/${letter.id}`} 
+                  key={letter.id}
+                  className={`bg-white p-4 rounded-2xl border border-pink-50 shadow-[0_4px_15px_rgba(255,107,138,0.05)] flex items-center gap-4 transition-all active:scale-[0.98] ${letter.status === 'completed' ? 'opacity-70' : ''}`}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <div className="w-12 h-12 bg-surface-container rounded-xl flex items-center justify-center overflow-hidden flex-shrink-0">
+                    <span className="material-symbols-outlined text-primary text-2xl opacity-50" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-button text-on-surface line-clamp-1">{letter.category?.name || 'ללא נושא'}</h4>
+                    <div className="flex items-center gap-1 mt-1">
+                      {letter.status === 'completed' ? (
+                        <span className="font-caption text-on-surface-variant">הושלם ב-{formatDate(letter.created_at)}</span>
+                      ) : (
+                        <span className="font-caption text-tertiary bg-tertiary-fixed px-2 py-0.5 rounded-full">{getStatusText(letter.status)}</span>
+                      )}
+                    </div>
+                  </div>
+                  <span className="material-symbols-outlined text-on-surface-variant">
+                    {letter.status === 'completed' ? 'check_circle' : 'more_vert'}
+                  </span>
+                </Link>
+              ))
+            )}
+          </div>
+        </section>
       </main>
 
       <BottomNav />
-
-      <Link
-        to="/upload"
-        className="fixed bottom-24 left-1/2 -translate-x-1/2 btn-primary w-14 h-14 rounded-full flex items-center justify-center shadow-lg md:hidden z-40"
-      >
-        <Plus className="w-6 h-6" />
-      </Link>
     </div>
   );
 }
