@@ -4,7 +4,7 @@ import BottomNav from '../components/BottomNav';
 export default function ProfilePage() {
   const { user, signOut } = useAuth();
 
-  const fullName = user?.user_metadata?.full_name || 'משתמש לא ידוע';
+  const fullName = user?.user_metadata?.full_name || user?.email || 'משתמש לא ידוע';
 
   return (
     <div className="min-h-screen bg-background pb-32 flex flex-col font-body-lg text-on-surface" dir="rtl">
