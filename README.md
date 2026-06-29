@@ -38,6 +38,15 @@ Israeli citizens — especially young adults and non-native Hebrew speakers — 
 
 ---
 
+## Demo Account
+
+To explore the app with pre-loaded letters and tasks, use the following test account:
+
+- **Username:** Liem
+- **Password:** my123456
+
+---
+
 ## External Services & Integrations
 
 | Service | Type | Purpose in the Product |
