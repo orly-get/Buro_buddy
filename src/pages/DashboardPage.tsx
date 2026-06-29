@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import { Letter, Category } from '../types';
@@ -11,7 +11,6 @@ interface LetterWithCategory extends Letter {
 
 export default function DashboardPage() {
   const { user, signOut } = useAuth();
-  const navigate = useNavigate();
   const [letters, setLetters] = useState<LetterWithCategory[]>([]);
   const [loading, setLoading] = useState(true);
 

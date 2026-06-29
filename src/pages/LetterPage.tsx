@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { deriveCompletionStatus } from '../lib/letterStatus';
 import { LetterWithDetails } from '../types';
 import BottomNav from '../components/BottomNav';
 
@@ -47,6 +48,19 @@ export default function LetterPage() {
         .eq('id', taskId);
 
       if (error) throw error;
+
+      // Recompute the letter's status from the post-toggle task set: 'completed'
+      // once every task is checked, back to 'pending' if a task is unchecked.
+      const nextTasks = (letter?.tasks ?? []).map((t) =>
+        t.id === taskId ? { ...t, is_completed: !isCompleted } : t
+      );
+      const { error: statusError } = await supabase
+        .from('letters')
+        .update({ status: deriveCompletionStatus(nextTasks) })
+        .eq('id', id);
+
+      if (statusError) throw statusError;
+
       fetchLetter();
     } catch (error) {
       console.error('Error toggling task:', error);
@@ -188,8 +202,8 @@ export default function LetterPage() {
           </div>
         )}
 
-        {/* Urgent Tag (Only shows if a task is due soon) */}
-        {hasUrgentTask && letter.status === 'completed' && (
+        {/* Urgent Tag (Only shows if an incomplete task is due soon) */}
+        {hasUrgentTask && (
           <div className="flex justify-between items-center bg-error-container/30 px-4 py-2 rounded-2xl border border-error/10">
             <div className="flex items-center gap-2">
               <span className="material-symbols-outlined text-error" style={{ fontVariationSettings: "'FILL' 1" }}>error</span>

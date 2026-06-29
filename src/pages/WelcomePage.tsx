@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function WelcomePage() {
@@ -50,7 +51,7 @@ export default function WelcomePage() {
         {/* Action Button */}
         <button
           onClick={signInWithGoogle}
-          className="w-full max-w-md h-[56px] bg-primary-container text-on-primary rounded-full font-button text-button shadow-[0_10px_25px_rgba(255,107,138,0.3)] hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-base mb-xl"
+          className="w-full max-w-md h-[56px] bg-primary-container text-on-primary rounded-full font-button text-button shadow-[0_10px_25px_rgba(255,107,138,0.3)] hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-base mb-md"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path
@@ -72,6 +73,12 @@ export default function WelcomePage() {
           </svg>
           התחבר עם גוגל
         </button>
+        <Link
+          to="/login"
+          className="w-full max-w-md h-[52px] bg-surface border border-primary-200 text-on-surface rounded-full text-button flex items-center justify-center hover:border-primary active:scale-95 transition-all mb-xl"
+        >
+          התחבר עם שם משתמש
+        </Link>
       </main>
     </div>
   );

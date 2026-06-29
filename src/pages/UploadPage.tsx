@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
+import { deriveCompletionStatus } from '../lib/letterStatus';
 import BottomNav from '../components/BottomNav';
 
 export default function UploadPage() {
@@ -142,9 +143,15 @@ export default function UploadPage() {
           }
         }
 
+        // A freshly analyzed letter is only "completed" if it has no tasks to do;
+        // otherwise it waits in 'pending' ("needs handling") until all tasks are checked.
+        const completionStatus = deriveCompletionStatus(
+          (result.tasks ?? []).map(() => ({ is_completed: false }))
+        );
+
         await supabase
           .from('letters')
-          .update({ status: 'completed' })
+          .update({ status: completionStatus })
           .eq('id', letter.id);
       } else {
         await supabase

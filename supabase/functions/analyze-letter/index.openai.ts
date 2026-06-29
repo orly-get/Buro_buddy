@@ -1,3 +1,8 @@
+// analyze-letter — OpenAI (direct) variant.
+// To use: rename this file to index.ts (replacing the OpenRouter version) and
+// set the OPENAI_API_KEY secret:  supabase secrets set OPENAI_API_KEY=sk-...
+// Optionally override the model with OPENAI_MODEL (default: gpt-4o-mini).
+
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { encodeBase64 } from "jsr:@std/encoding/base64";
 
@@ -24,17 +29,9 @@ interface AnalyzeResponse {
   category: string;
 }
 
-// Models can be overridden without redeploying via the OPENROUTER_MODELS env var
-// (comma-separated, highest priority first). OpenRouter tries them in order.
-// Default: OpenAI's gpt-4o-mini via OpenRouter — low-cost, reliable, reads both
-// images and (with the file-parser plugin below) PDFs. Billed through your
-// OpenRouter credit.
-// Free alternatives if you'd rather not pay (rate-limited, may need a small
-// one-time OpenRouter credit to unlock): google/gemma-4-31b-it:free,
-// nvidia/nemotron-nano-12b-v2-vl:free
-const DEFAULT_MODELS = [
-  "openai/gpt-4o-mini",
-];
+// gpt-4o-mini is low-cost and supports both image and PDF inputs + JSON output.
+// Override without redeploying via the OPENAI_MODEL env var.
+const DEFAULT_MODEL = "gpt-4o-mini";
 
 function jsonResponse(body: unknown, status: number) {
   return new Response(JSON.stringify(body), {
@@ -53,8 +50,7 @@ Deno.serve(async (req: Request) => {
   }
 
   // Off by default so we never leak raw provider output / stack traces to callers.
-  // Set the ANALYZE_DEBUG env var to "true" to include a `detail` field while
-  // diagnosing. The non-sensitive `error`/`stage`/`status` fields are always returned.
+  // Set ANALYZE_DEBUG=true to include a `detail` field while diagnosing.
   const debug = (Deno.env.get("ANALYZE_DEBUG") ?? "false") === "true";
 
   try {
@@ -74,16 +70,12 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    const apiKey = Deno.env.get("OPENROUTER_API_KEY");
+    const apiKey = Deno.env.get("OPENAI_API_KEY");
     if (!apiKey) {
-      return jsonResponse({ error: "OPENROUTER_API_KEY not configured" }, 500);
+      return jsonResponse({ error: "OPENAI_API_KEY not configured" }, 500);
     }
 
-    const models = (Deno.env.get("OPENROUTER_MODELS") ?? "")
-      .split(",")
-      .map((m) => m.trim())
-      .filter(Boolean);
-    const modelList = models.length > 0 ? models : DEFAULT_MODELS;
+    const model = Deno.env.get("OPENAI_MODEL") ?? DEFAULT_MODEL;
 
     // 1. Download the file
     let arrayBuffer: ArrayBuffer;
@@ -126,15 +118,14 @@ Deno.serve(async (req: Request) => {
 - רשימת כל הפעולות הנדרשות עם תאריכים מדויקים כפי שמופיע במסמך.
 - סיווג נכון של סוג המכתב.`;
 
-    // Images go in as image_url; PDFs use OpenRouter's "file" content part,
-    // parsed by the file-parser plugin. "pdf-text" extracts embedded text (free,
-    // works for text-based PDFs); switch to "mistral-ocr" for scanned PDFs (paid).
+    // OpenAI accepts images via image_url and PDFs via a "file" content part
+    // with base64 file_data (gpt-4o / gpt-4o-mini parse PDFs natively).
     const fileContentPart = isPdf
       ? { type: "file", file: { filename: file_name ?? "document.pdf", file_data: dataUri } }
       : { type: "image_url", image_url: { url: dataUri } };
 
-    const openRouterPayload: Record<string, unknown> = {
-      models: modelList,
+    const payload = {
+      model,
       messages: [
         {
           role: "user",
@@ -147,28 +138,20 @@ Deno.serve(async (req: Request) => {
       response_format: { type: "json_object" },
     };
 
-    if (isPdf) {
-      openRouterPayload.plugins = [
-        { id: "file-parser", pdf: { engine: Deno.env.get("PDF_ENGINE") ?? "pdf-text" } },
-      ];
-    }
-
-    // 4. Call OpenRouter
+    // 4. Call OpenAI
     let response: Response;
     try {
-      response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${apiKey}`,
-          "HTTP-Referer": "https://buro-buddy.vercel.app",
-          "X-Title": "BuroBuddy",
         },
-        body: JSON.stringify(openRouterPayload),
+        body: JSON.stringify(payload),
       });
     } catch (e) {
       return jsonResponse(
-        { error: "OpenRouter request failed", stage: "openrouter_fetch", detail: debug ? String(e) : undefined },
+        { error: "OpenAI request failed", stage: "openai_fetch", detail: debug ? String(e) : undefined },
         502,
       );
     }
@@ -176,25 +159,25 @@ Deno.serve(async (req: Request) => {
     const rawText = await response.text();
 
     if (!response.ok) {
-      console.error("OpenRouter API error:", response.status, rawText);
+      console.error("OpenAI API error:", response.status, rawText);
       return jsonResponse(
         {
-          error: "OpenRouter API error",
-          stage: "openrouter",
+          error: "OpenAI API error",
+          stage: "openai",
           status: response.status,
-          models: modelList,
+          model,
           detail: debug ? rawText.slice(0, 1500) : undefined,
         },
         502,
       );
     }
 
-    let data: { choices?: Array<{ message?: { content?: string } }> };
+    let data: any;
     try {
       data = JSON.parse(rawText);
     } catch {
       return jsonResponse(
-        { error: "OpenRouter returned non-JSON", stage: "openrouter_parse", detail: debug ? rawText.slice(0, 1500) : undefined },
+        { error: "OpenAI returned non-JSON", stage: "openai_parse", detail: debug ? rawText.slice(0, 1500) : undefined },
         502,
       );
     }
@@ -207,7 +190,7 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    // 5. Parse model output (strip ```json fences some models add despite json mode)
+    // 5. Parse model output (strip ```json fences just in case)
     const cleaned = generatedText.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
     let parsed: unknown;
     try {

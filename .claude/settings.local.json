@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npm test -- src/lib/letterStatus.test.ts)",
+      "PowerShell(npx eslint src/lib/letterStatus.ts src/lib/letterStatus.test.ts src/pages/UploadPage.tsx src/pages/LetterPage.tsx)"
+    ]
+  }
+}

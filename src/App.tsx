@@ -7,6 +7,7 @@ import UploadPage from './pages/UploadPage';
 import LetterPage from './pages/LetterPage';
 import ProfilePage from './pages/ProfilePage';
 import AuthCallback from './pages/AuthCallback';
+import LoginPage from './pages/LoginPage';
 import { ReactNode } from 'react';
 
 function PrivateRoute({ children }: { children: ReactNode }) {
@@ -39,8 +40,8 @@ function PublicRoute({ children }: { children: ReactNode }) {
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center">
-      <div className="w-full max-w-[430px] bg-background relative shadow-2xl overflow-x-hidden min-h-screen">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100 flex justify-center">
+      <div className="w-full max-w-[430px] bg-background relative shadow-2xl overflow-x-hidden min-h-screen border-x border-pink-100/60">
         <AuthProvider>
           <BrowserRouter>
             <Routes>
@@ -49,6 +50,14 @@ function App() {
                 element={
                   <PublicRoute>
                     <WelcomePage />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <PublicRoute>
+                    <LoginPage />
                   </PublicRoute>
                 }
               />

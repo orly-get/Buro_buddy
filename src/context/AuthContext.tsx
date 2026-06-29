@@ -1,12 +1,15 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
+import { usernameToEmail, normalizeUsername } from '../lib/username';
 
 interface AuthContextType {
   user: SupabaseUser | null;
   session: Session | null;
   loading: boolean;
   signInWithGoogle: () => Promise<void>;
+  signUpWithUsername: (username: string, password: string) => Promise<void>;
+  signInWithUsername: (username: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
 }
 
@@ -43,12 +46,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const signUpWithUsername = async (username: string, password: string) => {
+    const { data, error } = await supabase.auth.signUp({
+      email: usernameToEmail(username),
+      password,
+      options: { data: { username: normalizeUsername(username) } },
+    });
+    if (error) {
+      if (error.message.toLowerCase().includes('already registered')) {
+        throw new Error('שם המשתמש כבר תפוס');
+      }
+      throw new Error(error.message);
+    }
+    // When email confirmation is disabled, a duplicate signup can still come back
+    // without an error but with an empty identities array — treat that as "taken".
+    if (data.user && data.user.identities && data.user.identities.length === 0) {
+      throw new Error('שם המשתמש כבר תפוס');
+    }
+  };
+
+  const signInWithUsername = async (username: string, password: string) => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: usernameToEmail(username),
+      password,
+    });
+    if (error) {
+      throw new Error('שם משתמש או סיסמה שגויים');
+    }
+  };
+
   const signOut = async () => {
     await supabase.auth.signOut();
   };
 
   return (
-    <AuthContext.Provider value={{ user, session, loading, signInWithGoogle, signOut }}>
+    <AuthContext.Provider value={{ user, session, loading, signInWithGoogle, signUpWithUsername, signInWithUsername, signOut }}>
       {children}
     </AuthContext.Provider>
   );

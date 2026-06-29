@@ -1,13 +1,9 @@
-import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import BottomNav from '../components/BottomNav';
 
 export default function ProfilePage() {
   const { user, signOut } = useAuth();
 
-  const firstName = user?.user_metadata?.full_name?.split(' ')[0] 
-    || user?.email?.split('@')[0] 
-    || 'חבר';
   const fullName = user?.user_metadata?.full_name || 'משתמש לא ידוע';
 
   return (
