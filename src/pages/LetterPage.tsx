@@ -246,25 +246,7 @@ export default function LetterPage() {
         <h1 className="font-h1 text-on-surface px-1">{letter.category?.name || 'פירוט המכתב'}</h1>
         <p className="font-caption text-on-surface-variant px-1 -mt-4">{formatDate(letter.created_at)}</p>
 
-        {/* Scanned Letter Visual Placeholder */}
-        <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-pink-100 to-rose-100 rounded-[20px] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-          <div className="relative bg-white p-2 rounded-2xl shadow-sm border border-pink-50 overflow-hidden">
-            <div className="w-full h-48 bg-surface-container flex items-center justify-center rounded-xl opacity-80 group-hover:opacity-100 transition-all duration-500">
-              <span className="material-symbols-outlined text-primary text-6xl opacity-30" style={{ fontVariationSettings: "'FILL' 1" }}>description</span>
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent"></div>
-            {letter.original_text && (
-              <button 
-                onClick={() => alert("הטקסט המקורי מוצג בתחתית העמוד")}
-                className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-pink-100 flex items-center gap-2 hover:bg-white transition-all"
-              >
-                <span className="material-symbols-outlined text-primary text-sm">zoom_in</span>
-                <span className="font-button text-primary text-sm">צפה במקור</span>
-              </button>
-            )}
-          </div>
-        </div>
+
 
         {/* Key Action Items Card */}
         <section className="bg-white rounded-[32px] p-6 shadow-[0_20px_50px_rgba(255,107,138,0.08)] border border-pink-50 space-y-6">
