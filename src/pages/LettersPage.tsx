@@ -68,21 +68,23 @@ export default function LettersPage() {
 
   return (
     <div className="min-h-screen bg-background pb-32" dir="rtl">
-      <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] flex justify-between items-center px-6 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
-            {/* Generic placeholder profile image */}
-            <img
-              className="w-full h-full object-cover"
-              alt="Profile"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGW6W4rQKt4Tc1IFi2vmdOL1vVj28FNwCW2_1l38_oMPHQ_4QaYmOzNZm0cXW67TqdSXTHQ28rCDS34bWi9OrZ9cRW5QsOAA174NtK9vC7QZFCEqzPdrx8im2RCKmhJEUm5zhQ3Kvn7DBwXAQ7FvT7N6yrvhcJT88QlYJG54JTUp_RGyqe7V0ws9SP-nGHFpuudcFiwMu1xLiKxXFfVXfWnAbsPsg5Le5R4oxPeSvsQ7N5LQd_7voEhxDUBA1BF90LZALLmJ4lik4"
-            />
+      <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] px-6 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
+        <div className="w-full max-w-4xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+              {/* Generic placeholder profile image */}
+              <img
+                className="w-full h-full object-cover"
+                alt="Profile"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGW6W4rQKt4Tc1IFi2vmdOL1vVj28FNwCW2_1l38_oMPHQ_4QaYmOzNZm0cXW67TqdSXTHQ28rCDS34bWi9OrZ9cRW5QsOAA174NtK9vC7QZFCEqzPdrx8im2RCKmhJEUm5zhQ3Kvn7DBwXAQ7FvT7N6yrvhcJT88QlYJG54JTUp_RGyqe7V0ws9SP-nGHFpuudcFiwMu1xLiKxXFfVXfWnAbsPsg5Le5R4oxPeSvsQ7N5LQd_7voEhxDUBA1BF90LZALLmJ4lik4"
+              />
+            </div>
+            <span className="text-2xl font-black text-pink-500 italic">BuroBuddy</span>
           </div>
-          <span className="text-2xl font-black text-pink-500 italic">BuroBuddy</span>
+          <button className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-pink-50 transition-colors active:scale-95 duration-200">
+            <span className="material-symbols-outlined text-pink-500">notifications</span>
+          </button>
         </div>
-        <button className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-pink-50 transition-colors active:scale-95 duration-200">
-          <span className="material-symbols-outlined text-pink-500">notifications</span>
-        </button>
       </header>
 
       <main className="px-5 pt-8 max-w-4xl mx-auto">

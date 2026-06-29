@@ -8,9 +8,10 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-background pb-32 flex flex-col font-body-lg text-on-surface" dir="rtl">
-      {/* TopAppBar */}
-      <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] flex justify-center items-center px-4 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
-        <span className="text-xl font-black text-on-surface">הפרופיל שלי</span>
+      <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] px-4 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
+        <div className="w-full max-w-xl mx-auto flex justify-center items-center">
+          <span className="text-xl font-black text-on-surface">הפרופיל שלי</span>
+        </div>
       </header>
 
       <main className="flex-1 max-w-xl mx-auto px-5 py-6 space-y-6 w-full">

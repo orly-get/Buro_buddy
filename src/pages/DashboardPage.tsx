@@ -77,24 +77,26 @@ export default function DashboardPage() {
   return (
     <div className="bg-background text-on-surface min-h-screen pb-32" dir="rtl">
       {/* TopAppBar */}
-      <header className="flex justify-between items-center px-6 py-4 w-full sticky top-0 z-50 bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] rounded-b-[32px]">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container bg-surface-container">
-            <img 
-              alt="פרופיל משתמש" 
-              className="w-full h-full object-cover scale-150" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGKdpXtcpX86zfVi7qNTaz1VKkAakAo8WFbTosIHBA2RoE14ILQuKd6DIKvpw_IoGydAWTmhkvsDG3Vx2znYsLIBftxTBsjdbK9fCHeUIpb4OwueTCrvAlqUwheFHof41fXAilM1OM4G--rkOPgU2VStioo5WL-TgqTm8fxd37fLFqMwG0lc3NH6it4wOQzrc3he6xnIi9R2EEmP_w0WXLZq2_tfxSHSnnCvSXDYEthsp1C_9bN0tHhtRauA9EGiaveqGEWLNdGIU" 
-            />
+      <header className="px-6 py-4 w-full sticky top-0 z-50 bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] rounded-b-[32px]">
+        <div className="w-full max-w-4xl mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container bg-surface-container">
+              <img 
+                alt="פרופיל משתמש" 
+                className="w-full h-full object-cover scale-150" 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGKdpXtcpX86zfVi7qNTaz1VKkAakAo8WFbTosIHBA2RoE14ILQuKd6DIKvpw_IoGydAWTmhkvsDG3Vx2znYsLIBftxTBsjdbK9fCHeUIpb4OwueTCrvAlqUwheFHof41fXAilM1OM4G--rkOPgU2VStioo5WL-TgqTm8fxd37fLFqMwG0lc3NH6it4wOQzrc3he6xnIi9R2EEmP_w0WXLZq2_tfxSHSnnCvSXDYEthsp1C_9bN0tHhtRauA9EGiaveqGEWLNdGIU" 
+              />
+            </div>
+            <span className="text-2xl font-black text-pink-500 italic">BuroBuddy</span>
           </div>
-          <span className="text-2xl font-black text-pink-500 italic">BuroBuddy</span>
+          <button 
+            onClick={signOut}
+            className="w-10 h-10 flex items-center justify-center rounded-xl bg-pink-50 text-pink-500 hover:bg-pink-100 hover:text-error transition-colors active:scale-95 duration-200"
+            title="התנתק"
+          >
+            <span className="material-symbols-outlined">logout</span>
+          </button>
         </div>
-        <button 
-          onClick={signOut}
-          className="w-10 h-10 flex items-center justify-center rounded-xl bg-pink-50 text-pink-500 hover:bg-pink-100 hover:text-error transition-colors active:scale-95 duration-200"
-          title="התנתק"
-        >
-          <span className="material-symbols-outlined">logout</span>
-        </button>
       </header>
 
       <main className="px-5 pt-6 flex flex-col gap-6 max-w-4xl mx-auto">

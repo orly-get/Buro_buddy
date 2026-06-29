@@ -158,23 +158,24 @@ export default function LetterPage() {
 
   return (
     <div className="min-h-screen bg-background pb-32 flex flex-col font-body-lg text-on-surface" dir="rtl">
-      {/* TopAppBar with integrated Back and Delete buttons */}
-      <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] flex justify-between items-center px-4 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
-        <Link to="/dashboard" className="w-10 h-10 flex items-center justify-center rounded-xl text-primary hover:bg-pink-50 transition-colors active:scale-95">
-          <span className="material-symbols-outlined">arrow_forward</span>
-        </Link>
-        
-        <div className="flex items-center gap-2">
-          <span className="text-xl font-black text-pink-500 italic">BuroBuddy</span>
-        </div>
+      <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] px-4 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
+        <div className="w-full max-w-2xl mx-auto flex justify-between items-center">
+          <Link to="/dashboard" className="w-10 h-10 flex items-center justify-center rounded-xl text-primary hover:bg-pink-50 transition-colors active:scale-95">
+            <span className="material-symbols-outlined">arrow_forward</span>
+          </Link>
+          
+          <div className="flex items-center gap-2">
+            <span className="text-xl font-black text-pink-500 italic">BuroBuddy</span>
+          </div>
 
-        <button 
-          onClick={deleteLetter}
-          disabled={deleting}
-          className="w-10 h-10 flex items-center justify-center rounded-xl text-error hover:bg-error/10 transition-colors active:scale-95"
-        >
-          <span className="material-symbols-outlined">delete</span>
-        </button>
+          <button 
+            onClick={deleteLetter}
+            disabled={deleting}
+            className="w-10 h-10 flex items-center justify-center rounded-xl text-error hover:bg-error/10 transition-colors active:scale-95"
+          >
+            <span className="material-symbols-outlined">delete</span>
+          </button>
+        </div>
       </header>
 
       <main className="flex-1 px-5 py-6 space-y-6 max-w-2xl mx-auto w-full">

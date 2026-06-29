@@ -40,75 +40,73 @@ function PublicRoute({ children }: { children: ReactNode }) {
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100 flex justify-center">
-      <div className="w-full max-w-[430px] bg-background relative shadow-2xl overflow-x-hidden min-h-screen border-x border-pink-100/60">
-        <AuthProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <PublicRoute>
-                    <WelcomePage />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/login"
-                element={
-                  <PublicRoute>
-                    <LoginPage />
-                  </PublicRoute>
-                }
-              />
-              <Route
-                path="/auth/callback"
-                element={<AuthCallback />}
-              />
-              <Route
-                path="/dashboard"
-                element={
-                  <PrivateRoute>
-                    <DashboardPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/letters"
-                element={
-                  <PrivateRoute>
-                    <LettersPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/upload"
-                element={
-                  <PrivateRoute>
-                    <UploadPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/letter/:id"
-                element={
-                  <PrivateRoute>
-                    <LetterPage />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <PrivateRoute>
-                    <ProfilePage />
-                  </PrivateRoute>
-                }
-              />
-            </Routes>
-          </BrowserRouter>
-        </AuthProvider>
-      </div>
+    <div className="min-h-screen bg-background relative overflow-x-hidden">
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <WelcomePage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PublicRoute>
+                  <LoginPage />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/auth/callback"
+              element={<AuthCallback />}
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <DashboardPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/letters"
+              element={
+                <PrivateRoute>
+                  <LettersPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/upload"
+              element={
+                <PrivateRoute>
+                  <UploadPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/letter/:id"
+              element={
+                <PrivateRoute>
+                  <LetterPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <ProfilePage />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }
