@@ -17,6 +17,7 @@ export interface Letter {
   original_text: string | null;
   status: 'pending' | 'processing' | 'completed' | 'failed';
   created_at: string;
+  completed_at: string | null;
   category?: Category | null;
 }
 
