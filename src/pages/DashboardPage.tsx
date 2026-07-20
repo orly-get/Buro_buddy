@@ -87,11 +87,11 @@ export default function DashboardPage() {
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGKdpXtcpX86zfVi7qNTaz1VKkAakAo8WFbTosIHBA2RoE14ILQuKd6DIKvpw_IoGydAWTmhkvsDG3Vx2znYsLIBftxTBsjdbK9fCHeUIpb4OwueTCrvAlqUwheFHof41fXAilM1OM4G--rkOPgU2VStioo5WL-TgqTm8fxd37fLFqMwG0lc3NH6it4wOQzrc3he6xnIi9R2EEmP_w0WXLZq2_tfxSHSnnCvSXDYEthsp1C_9bN0tHhtRauA9EGiaveqGEWLNdGIU" 
               />
             </div>
-            <span className="text-2xl font-black text-primary italic">BuroBuddy</span>
+            <span className="text-2xl md:text-lg font-black text-primary italic">BuroBuddy</span>
           </div>
-          <button 
+          <button
             onClick={signOut}
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-50 text-primary hover:bg-primary-100 hover:text-error transition-colors active:scale-95 duration-200"
+            className="w-10 h-10 md:w-8 md:h-8 flex items-center justify-center rounded-xl bg-primary-50 text-primary hover:bg-primary-100 hover:text-error transition-colors active:scale-95 duration-200"
             title="התנתק"
           >
             <span className="material-symbols-outlined">logout</span>
@@ -99,22 +99,24 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <main className="page-enter px-5 pt-6 flex flex-col gap-6 max-w-2xl mx-auto">
+      <main className="page-enter px-5 pt-6 md:pt-8 flex flex-col gap-6 max-w-2xl mx-auto">
         {/* Hero Section: Scan Letter */}
-        <section className="relative overflow-hidden rounded-[32px] bg-white p-6 shadow-[0_10px_40px_rgba(255,107,138,0.1)] border border-primary-50">
+        <section className="relative overflow-hidden rounded-[32px] md:rounded-[24px] bg-white p-6 md:p-5 shadow-[0_10px_40px_rgba(255,107,138,0.1)] border border-primary-50">
           <div className="relative z-10">
-            <h1 className="font-h1 text-h1 text-on-surface mb-1">שלום {firstName}, טוב לראות אותך</h1>
-            <p className="font-body-sm text-body-sm text-on-surface-variant mb-6">מוכן לטפל בניירת שלך היום?</p>
-            <Link 
-              to="/upload" 
-              className="group w-full h-[180px] bg-primary-container rounded-3xl flex flex-col items-center justify-center gap-2 text-on-primary shadow-[0_20px_50px_rgba(255,107,138,0.3)] hover:shadow-[0_24px_60px_rgba(255,107,138,0.4)] hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
+            <h1 className="font-h1 text-h1 md:text-[20px] md:leading-7 text-on-surface mb-1">שלום {firstName}, טוב לראות אותך</h1>
+            <p className="font-body-sm text-body-sm text-on-surface-variant mb-6 md:mb-4">מוכן לטפל בניירת שלך היום?</p>
+            <Link
+              to="/upload"
+              className="group w-full h-[180px] md:h-[88px] bg-primary-container rounded-3xl md:rounded-2xl flex flex-col md:flex-row items-center justify-center md:justify-start gap-2 md:gap-4 md:px-6 text-on-primary shadow-[0_20px_50px_rgba(255,107,138,0.3)] hover:shadow-[0_24px_60px_rgba(255,107,138,0.4)] hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
               style={{ textDecoration: 'none' }}
             >
-              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-1">
-                <span className="material-symbols-outlined text-[40px]" style={{ fontVariationSettings: "'FILL' 1" }}>document_scanner</span>
+              <div className="w-16 h-16 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center mb-1 md:mb-0 md:shrink-0">
+                <span className="material-symbols-outlined text-[40px] md:text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>document_scanner</span>
               </div>
-              <span className="font-button text-h2">סריקת מכתב</span>
-              <span className="font-caption text-white/80">הבינה המלאכותית תטפל בכל השאר</span>
+              <div className="md:text-right">
+                <span className="font-button text-h2 md:text-[17px] block">סריקת מכתב</span>
+                <span className="font-caption text-white/80">הבינה המלאכותית תטפל בכל השאר</span>
+              </div>
             </Link>
           </div>
           {/* Decorative abstract shapes */}
