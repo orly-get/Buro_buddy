@@ -12,10 +12,28 @@ export default function WelcomePage() {
     );
   }
 
+  const steps = [
+    {
+      icon: 'document_scanner',
+      title: 'סורקים את המכתב',
+      description: 'מעלים תמונה או PDF של המכתב הרשמי שקיבלתם.',
+    },
+    {
+      icon: 'auto_awesome',
+      title: 'ה-AI מפענח',
+      description: 'הבינה המלאכותית מתרגמת את השפה המשפטית לעברית פשוטה.',
+    },
+    {
+      icon: 'checklist',
+      title: 'מקבלים משימות',
+      description: 'רשימת פעולות ומועדים ברורה, בלי לפספס כלום.',
+    },
+  ];
+
   return (
-    <div className="bg-background text-on-surface min-h-screen flex flex-col" dir="rtl">
+    <div className="bg-background text-on-surface" dir="rtl">
       {/* Main Content Canvas */}
-      <main className="page-enter flex-1 px-margin-mobile py-lg flex flex-col items-center justify-center text-center md:flex-row md:gap-16 md:max-w-5xl md:mx-auto md:text-right md:my-10 md:p-12 md:bg-white md:rounded-[40px] md:shadow-[0_20px_60px_rgba(255,107,138,0.12)] md:border md:border-primary-50">
+      <main className="page-enter min-h-screen px-margin-mobile py-lg flex flex-col items-center justify-center text-center md:flex-row md:gap-16 md:max-w-5xl md:mx-auto md:text-right md:my-10 md:p-12 md:bg-white md:rounded-[40px] md:shadow-[0_20px_60px_rgba(255,107,138,0.12)] md:border md:border-primary-50">
         {/* Illustration Container */}
         <div className="relative w-full max-w-[240px] sm:max-w-sm aspect-square mb-md md:mb-0 md:max-w-md md:w-1/2 md:shrink-0 flex items-center justify-center">
           <div className="absolute inset-0 bg-primary-fixed-dim opacity-20 rounded-full blur-3xl"></div>
@@ -82,6 +100,28 @@ export default function WelcomePage() {
           </Link>
         </div>
       </main>
+
+      {/* How It Works */}
+      <section className="px-margin-mobile pb-xl md:max-w-5xl md:mx-auto">
+        <h3 className="font-h1 text-h1 text-on-surface text-center mb-lg md:mb-xl">איך זה עובד?</h3>
+        <div className="flex flex-col md:flex-row gap-md md:gap-lg">
+          {steps.map((step, index) => (
+            <div
+              key={step.title}
+              className="relative flex-1 bg-white p-lg rounded-[24px] shadow-[0_8px_24px_rgba(255,107,138,0.08)] border border-primary-50 text-right transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(255,107,138,0.14)]"
+            >
+              <div className="flex items-center justify-between mb-sm">
+                <span className="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>{step.icon}</span>
+                </span>
+                <span className="font-h1 text-primary-200">{index + 1}</span>
+              </div>
+              <p className="font-h2 text-h2 text-on-surface mb-1">{step.title}</p>
+              <p className="font-body-sm text-body-sm text-on-surface-variant">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
