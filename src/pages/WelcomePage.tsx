@@ -105,10 +105,10 @@ export default function WelcomePage() {
       <a
         href="#how-it-works"
         aria-label="גלול למטה לפרטים נוספים"
-        className="flex flex-col items-center gap-1 mx-auto mb-md text-primary-300 hover:text-primary transition-colors w-fit"
+        className="flex flex-col items-center gap-1 mx-auto mb-lg w-fit px-5 py-2 rounded-full bg-white border border-primary-100 shadow-[0_4px_16px_rgba(255,107,138,0.15)] text-primary hover:bg-primary-50 hover:-translate-y-0.5 transition-all"
       >
-        <span className="font-caption text-caption">עוד יש למטה</span>
-        <span className="material-symbols-outlined animate-bounce">expand_more</span>
+        <span className="font-caption text-caption font-bold">עוד יש למטה</span>
+        <span className="material-symbols-outlined animate-bounce text-[28px]" style={{ fontVariationSettings: "'FILL' 1" }}>expand_more</span>
       </a>
 
       {/* How It Works */}
