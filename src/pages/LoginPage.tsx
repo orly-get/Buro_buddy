@@ -46,16 +46,16 @@ export default function LoginPage() {
   };
 
   const inputClass =
-    'w-full h-[52px] px-md rounded-input bg-surface border border-primary-200 focus:border-primary outline-none text-on-surface';
+    'w-full h-[52px] px-md rounded-input bg-surface border border-primary-200 focus:border-primary focus:shadow-[0_0_0_4px_rgba(173,44,78,0.08)] outline-none text-on-surface transition-all duration-200';
 
   return (
     <div className="bg-background text-on-surface min-h-screen flex flex-col" dir="rtl">
-      <main className="flex-1 px-margin-mobile pt-xl pb-xl flex flex-col justify-center">
+      <main className="page-enter flex-1 px-margin-mobile pt-xl pb-xl flex flex-col justify-center">
         <h1 className="text-h1 text-on-surface text-center mb-lg">
           {mode === 'login' ? 'התחברות' : 'הרשמה'}
         </h1>
 
-        <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto space-y-md">
+        <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto space-y-md bg-white rounded-[28px] p-6 shadow-[0_10px_40px_rgba(173,44,78,0.08)] border border-primary-50">
           <div>
             <label className="block text-body-sm text-on-surface-variant mb-xs" htmlFor="username">
               שם משתמש

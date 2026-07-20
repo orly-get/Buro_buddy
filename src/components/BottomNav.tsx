@@ -23,7 +23,7 @@ export default function BottomNav() {
   const activeTab = getActiveTab();
 
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full z-[999] flex justify-around items-center px-2 pb-8 pt-3 bg-white/95 backdrop-blur-lg rounded-t-[32px] border-t border-pink-100 shadow-[0_-10px_40px_rgba(255,107,138,0.15)]">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full z-[999] flex justify-around items-center px-2 pb-8 pt-3 bg-white/95 backdrop-blur-lg rounded-t-[32px] border-t border-primary-100 shadow-[0_-10px_40px_rgba(173,44,78,0.15)]">
       {navItems.map((item) => {
         const tabActive = activeTab === item.path;
         const navPath = item.path;
@@ -32,13 +32,13 @@ export default function BottomNav() {
           <NavLink
             key={item.path}
             to={navPath}
-            className={`flex flex-col items-center justify-center px-4 py-2 transition-all active:scale-90 duration-150 ${
-              tabActive ? 'text-pink-500 bg-pink-50 rounded-2xl' : 'text-gray-400 hover:text-pink-400'
+            className={`flex flex-col items-center justify-center px-4 py-2 transition-all active:scale-90 duration-200 ${
+              tabActive ? 'text-primary bg-primary-50 rounded-2xl' : 'text-on-surface-variant/50 hover:text-primary-400'
             }`}
             style={{ textDecoration: 'none' }}
           >
-            <span 
-              className="material-symbols-outlined" 
+            <span
+              className="material-symbols-outlined transition-transform duration-200"
               style={tabActive ? { fontVariationSettings: "'FILL' 1" } : undefined}
             >
               {item.icon}

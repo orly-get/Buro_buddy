@@ -5,6 +5,9 @@
 @layer base {
   html {
     font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   html[dir="rtl"] body {
@@ -15,6 +18,10 @@
   body {
     background-color: #FFF5F7;
     color: #1B1C1C;
+  }
+
+  h1, h2, h3 {
+    letter-spacing: -0.01em;
   }
 }
 
@@ -147,7 +154,29 @@ input:focus-visible {
 button, a, input {
   transition-property: background-color, border-color, color, opacity, box-shadow, transform;
   transition-duration: 150ms;
-  transition-timing-function: ease-in-out;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Page Enter Animation ──────────────────────────────────────────────── */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: fade-in-up 320ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
+  }
 }
 
 /* ─── Hero gradient helper ──────────────────────────────────────────────── */

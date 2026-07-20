@@ -15,7 +15,7 @@ export default function WelcomePage() {
   return (
     <div className="bg-background text-on-surface min-h-screen flex flex-col" dir="rtl">
       {/* Main Content Canvas */}
-      <main className="flex-1 px-margin-mobile pt-lg pb-xl flex flex-col items-center justify-center text-center">
+      <main className="page-enter flex-1 px-margin-mobile pt-lg pb-xl flex flex-col items-center justify-center text-center">
         {/* Illustration Container */}
         <div className="relative w-full max-w-sm aspect-square mb-lg flex items-center justify-center">
           <div className="absolute inset-0 bg-primary-fixed-dim opacity-20 rounded-full blur-3xl"></div>
@@ -36,12 +36,12 @@ export default function WelcomePage() {
 
         {/* Bento Grid Feature Highlight */}
         <div className="grid grid-cols-2 gap-md w-full max-w-md mb-xl">
-          <div className="bg-surface-container-lowest p-md rounded-[24px] shadow-[0_8px_20px_rgba(255,107,138,0.08)] flex flex-col items-start gap-xs text-right">
+          <div className="bg-surface-container-lowest p-md rounded-[24px] shadow-[0_8px_20px_rgba(255,107,138,0.08)] flex flex-col items-start gap-xs text-right transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(255,107,138,0.14)]">
             <span className="material-symbols-outlined text-primary mb-xs" style={{ fontVariationSettings: "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24" }}>auto_awesome</span>
             <p className="font-caption text-caption text-on-surface font-bold">תרגום AI</p>
             <p className="font-body-sm text-caption text-on-surface-variant">הופך שפה משפטית מסובכת לעברית פשוטה.</p>
           </div>
-          <div className="bg-surface-container-lowest p-md rounded-[24px] shadow-[0_8px_20px_rgba(255,107,138,0.08)] flex flex-col items-start gap-xs text-right">
+          <div className="bg-surface-container-lowest p-md rounded-[24px] shadow-[0_8px_20px_rgba(255,107,138,0.08)] flex flex-col items-start gap-xs text-right transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(255,107,138,0.14)]">
             <span className="material-symbols-outlined text-primary mb-xs" style={{ fontVariationSettings: "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24" }}>alarm</span>
             <p className="font-caption text-caption text-on-surface font-bold">התראות חכמות</p>
             <p className="font-body-sm text-caption text-on-surface-variant">לעולם לא תפספסו שוב מועד להגשת מסמכים.</p>
