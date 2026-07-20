@@ -8,6 +8,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
   }
 
   html[dir="rtl"] body {
@@ -176,6 +177,10 @@ button, a, input {
 @media (prefers-reduced-motion: reduce) {
   .page-enter {
     animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
   }
 }
 

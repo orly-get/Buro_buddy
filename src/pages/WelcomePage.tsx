@@ -33,7 +33,7 @@ export default function WelcomePage() {
   return (
     <div className="bg-background text-on-surface" dir="rtl">
       {/* Main Content Canvas */}
-      <main className="page-enter min-h-screen px-margin-mobile py-lg flex flex-col items-center justify-center text-center md:flex-row md:gap-16 md:max-w-5xl md:mx-auto md:text-right md:my-10 md:p-12 md:bg-white md:rounded-[40px] md:shadow-[0_20px_60px_rgba(255,107,138,0.12)] md:border md:border-primary-50">
+      <main className="page-enter min-h-[85vh] sm:min-h-[80vh] px-margin-mobile py-lg flex flex-col items-center justify-center text-center md:flex-row md:gap-16 md:max-w-5xl md:mx-auto md:text-right md:my-10 md:p-12 md:bg-white md:rounded-[40px] md:shadow-[0_20px_60px_rgba(255,107,138,0.12)] md:border md:border-primary-50">
         {/* Illustration Container */}
         <div className="relative w-full max-w-[240px] sm:max-w-sm aspect-square mb-md md:mb-0 md:max-w-md md:w-1/2 md:shrink-0 flex items-center justify-center">
           <div className="absolute inset-0 bg-primary-fixed-dim opacity-20 rounded-full blur-3xl"></div>
@@ -101,8 +101,18 @@ export default function WelcomePage() {
         </div>
       </main>
 
+      {/* Scroll cue: hints that more content follows below the hero */}
+      <a
+        href="#how-it-works"
+        aria-label="גלול למטה לפרטים נוספים"
+        className="flex flex-col items-center gap-1 mx-auto mb-md text-primary-300 hover:text-primary transition-colors w-fit"
+      >
+        <span className="font-caption text-caption">עוד יש למטה</span>
+        <span className="material-symbols-outlined animate-bounce">expand_more</span>
+      </a>
+
       {/* How It Works */}
-      <section className="px-margin-mobile pb-xl md:max-w-5xl md:mx-auto">
+      <section id="how-it-works" className="px-margin-mobile pb-xl md:max-w-5xl md:mx-auto">
         <h3 className="font-h1 text-h1 text-on-surface text-center mb-lg md:mb-xl">איך זה עובד?</h3>
         <div className="flex flex-col md:flex-row gap-md md:gap-lg">
           {steps.map((step, index) => (
