@@ -75,7 +75,7 @@ export default function DashboardPage() {
   const recentLetters = letters.slice(0, 3);
 
   return (
-    <div className="bg-background text-on-surface min-h-screen pb-40" dir="rtl">
+    <div className="bg-background text-on-surface min-h-screen pb-40 sm:pr-24" dir="rtl">
       {/* TopAppBar */}
       <header className="px-6 py-4 w-full sticky top-0 z-50 bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] rounded-b-[32px]">
         <div className="w-full max-w-3xl mx-auto flex justify-between items-center">
@@ -150,7 +150,7 @@ export default function DashboardPage() {
                     <h4 className="font-button text-on-surface line-clamp-1">{letter.category?.name || 'ללא נושא'}</h4>
                     <div className="flex items-center gap-1 mt-1">
                       {letter.status === 'completed' ? (
-                        <span className="font-caption text-on-surface-variant">הושלם ב-{formatDate(letter.created_at)}</span>
+                        <span className="font-caption text-on-surface-variant">הושלם ב-{formatDate(letter.completed_at ?? letter.created_at)}</span>
                       ) : (
                         <span className="font-caption text-tertiary bg-tertiary-fixed px-2 py-0.5 rounded-full">{getStatusText(letter.status)}</span>
                       )}

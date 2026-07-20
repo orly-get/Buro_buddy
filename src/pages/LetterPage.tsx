@@ -54,9 +54,13 @@ export default function LetterPage() {
       const nextTasks = (letter?.tasks ?? []).map((t) =>
         t.id === taskId ? { ...t, is_completed: !isCompleted } : t
       );
+      const nextStatus = deriveCompletionStatus(nextTasks);
       const { error: statusError } = await supabase
         .from('letters')
-        .update({ status: deriveCompletionStatus(nextTasks) })
+        .update({
+          status: nextStatus,
+          completed_at: nextStatus === 'completed' ? new Date().toISOString() : null,
+        })
         .eq('id', id);
 
       if (statusError) throw statusError;
@@ -157,7 +161,7 @@ export default function LetterPage() {
   });
 
   return (
-    <div className="min-h-screen bg-background pb-40 flex flex-col font-body-lg text-on-surface" dir="rtl">
+    <div className="min-h-screen bg-background pb-40 sm:pr-24 flex flex-col font-body-lg text-on-surface" dir="rtl">
       <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] px-4 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
         <div className="w-full max-w-2xl mx-auto flex justify-between items-center">
           <Link to="/letters" className="w-10 h-10 flex items-center justify-center rounded-xl text-primary hover:bg-primary-50 transition-colors active:scale-95">

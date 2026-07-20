@@ -67,7 +67,7 @@ export default function LettersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background pb-40" dir="rtl">
+    <div className="min-h-screen bg-background pb-40 sm:pr-24" dir="rtl">
       <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] px-6 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
         <div className="w-full max-w-3xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3">
@@ -139,7 +139,7 @@ export default function LettersPage() {
                       {letter.status === 'completed' ? 'check_circle' : 'calendar_today'}
                     </span>
                     <span className="font-caption text-caption">
-                      {letter.status === 'completed' ? `הושלם ב-${formatDate(letter.created_at)}` : formatDate(letter.created_at)}
+                      {letter.status === 'completed' ? `הושלם ב-${formatDate(letter.completed_at ?? letter.created_at)}` : formatDate(letter.created_at)}
                     </span>
                   </div>
                 </div>

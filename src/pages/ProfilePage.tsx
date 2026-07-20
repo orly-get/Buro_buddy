@@ -7,7 +7,7 @@ export default function ProfilePage() {
   const fullName = user?.user_metadata?.full_name || user?.email || 'משתמש לא ידוע';
 
   return (
-    <div className="min-h-screen bg-background pb-40 flex flex-col font-body-lg text-on-surface" dir="rtl">
+    <div className="min-h-screen bg-background pb-40 sm:pr-24 flex flex-col font-body-lg text-on-surface" dir="rtl">
       <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] px-4 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
         <div className="w-full max-w-xl mx-auto flex justify-center items-center">
           <span className="text-xl font-black text-on-surface">הפרופיל שלי</span>
