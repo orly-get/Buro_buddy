@@ -71,12 +71,11 @@ export default function LettersPage() {
       <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] px-6 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
         <div className="w-full max-w-3xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
-              {/* Generic placeholder profile image */}
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container bg-surface-container">
               <img
-                className="w-full h-full object-cover"
-                alt="Profile"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGW6W4rQKt4Tc1IFi2vmdOL1vVj28FNwCW2_1l38_oMPHQ_4QaYmOzNZm0cXW67TqdSXTHQ28rCDS34bWi9OrZ9cRW5QsOAA174NtK9vC7QZFCEqzPdrx8im2RCKmhJEUm5zhQ3Kvn7DBwXAQ7FvT7N6yrvhcJT88QlYJG54JTUp_RGyqe7V0ws9SP-nGHFpuudcFiwMu1xLiKxXFfVXfWnAbsPsg5Le5R4oxPeSvsQ7N5LQd_7voEhxDUBA1BF90LZALLmJ4lik4"
+                alt="פרופיל משתמש"
+                className="w-full h-full object-cover scale-150"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGKdpXtcpX86zfVi7qNTaz1VKkAakAo8WFbTosIHBA2RoE14ILQuKd6DIKvpw_IoGydAWTmhkvsDG3Vx2znYsLIBftxTBsjdbK9fCHeUIpb4OwueTCrvAlqUwheFHof41fXAilM1OM4G--rkOPgU2VStioo5WL-TgqTm8fxd37fLFqMwG0lc3NH6it4wOQzrc3he6xnIi9R2EEmP_w0WXLZq2_tfxSHSnnCvSXDYEthsp1C_9bN0tHhtRauA9EGiaveqGEWLNdGIU"
               />
             </div>
             <span className="text-2xl font-black text-primary italic">BuroBuddy</span>

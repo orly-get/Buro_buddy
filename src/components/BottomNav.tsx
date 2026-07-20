@@ -23,7 +23,7 @@ export default function BottomNav() {
   const activeTab = getActiveTab();
 
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full sm:w-auto sm:left-auto sm:translate-x-0 sm:right-5 sm:top-1/2 sm:-translate-y-1/2 sm:bottom-auto z-[999] flex sm:flex-col justify-around sm:justify-center sm:gap-1 items-center px-2 sm:px-2 pb-8 sm:pb-2 pt-3 sm:pt-2 bg-white/95 backdrop-blur-lg rounded-t-[32px] sm:rounded-[28px] border-t sm:border border-primary-100 shadow-[0_-10px_40px_rgba(173,44,78,0.15)] sm:shadow-[0_10px_40px_rgba(173,44,78,0.15)]">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full sm:w-auto sm:left-auto sm:translate-x-0 sm:right-5 sm:top-1/2 sm:-translate-y-1/2 sm:bottom-auto z-[999] flex sm:flex-col justify-around sm:justify-center sm:gap-2 items-center px-2 sm:px-3 pb-8 sm:pb-4 pt-3 sm:pt-4 bg-white/95 backdrop-blur-lg rounded-t-[32px] sm:rounded-[28px] border-t sm:border border-primary-100 shadow-[0_-10px_40px_rgba(173,44,78,0.15)] sm:shadow-[0_10px_40px_rgba(173,44,78,0.15)]">
       {navItems.map((item) => {
         const tabActive = activeTab === item.path;
         const navPath = item.path;
@@ -32,18 +32,18 @@ export default function BottomNav() {
           <NavLink
             key={item.path}
             to={navPath}
-            className={`flex flex-col items-center justify-center px-4 py-2 transition-all active:scale-90 duration-200 ${
+            className={`flex flex-col items-center justify-center px-4 sm:px-5 py-2 sm:py-3 transition-all active:scale-90 duration-200 ${
               tabActive ? 'text-primary bg-primary-50 rounded-2xl' : 'text-on-surface-variant/50 hover:text-primary-400'
             }`}
             style={{ textDecoration: 'none' }}
           >
             <span
-              className="material-symbols-outlined transition-transform duration-200"
+              className="material-symbols-outlined text-[24px] sm:text-[28px] transition-transform duration-200"
               style={tabActive ? { fontVariationSettings: "'FILL' 1" } : undefined}
             >
               {item.icon}
             </span>
-            <span className="font-['Inter'] text-[11px] font-semibold uppercase tracking-wider mt-1">
+            <span className="font-['Inter'] text-[11px] sm:text-[12px] font-semibold uppercase tracking-wider mt-1">
               {item.label}
             </span>
           </NavLink>
