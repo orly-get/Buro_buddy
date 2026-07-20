@@ -75,10 +75,10 @@ export default function DashboardPage() {
   const recentLetters = letters.slice(0, 3);
 
   return (
-    <div className="bg-background text-on-surface min-h-screen pb-32" dir="rtl">
+    <div className="bg-background text-on-surface min-h-screen pb-40" dir="rtl">
       {/* TopAppBar */}
       <header className="px-6 py-4 w-full sticky top-0 z-50 bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] rounded-b-[32px]">
-        <div className="w-full max-w-2xl mx-auto flex justify-between items-center">
+        <div className="w-full max-w-3xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container bg-surface-container">
               <img 
@@ -99,7 +99,7 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <main className="page-enter px-5 pt-6 sm:pt-8 flex flex-col gap-6 max-w-2xl mx-auto">
+      <main className="page-enter px-5 pt-6 sm:pt-8 flex flex-col gap-6 max-w-3xl mx-auto">
         {/* Hero Section: Scan Letter */}
         <section className="relative overflow-hidden rounded-[32px] sm:rounded-[24px] bg-white p-6 sm:p-5 shadow-[0_10px_40px_rgba(255,107,138,0.1)] border border-primary-50">
           <div className="relative z-10">

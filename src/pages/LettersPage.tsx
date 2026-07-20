@@ -67,9 +67,9 @@ export default function LettersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background pb-32" dir="rtl">
+    <div className="min-h-screen bg-background pb-40" dir="rtl">
       <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] px-6 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
-        <div className="w-full max-w-2xl mx-auto flex justify-between items-center">
+        <div className="w-full max-w-3xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
               {/* Generic placeholder profile image */}
@@ -87,7 +87,7 @@ export default function LettersPage() {
         </div>
       </header>
 
-      <main className="page-enter px-5 pt-8 max-w-2xl mx-auto">
+      <main className="page-enter px-5 pt-8 max-w-3xl mx-auto">
         <section className="mb-8 text-right">
           <h1 className="font-h1 text-h1 text-on-surface mb-2">המכתבים שלי</h1>
           <p className="font-body-sm text-body-sm text-on-surface-variant">

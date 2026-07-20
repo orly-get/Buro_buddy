@@ -181,7 +181,7 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-32 flex flex-col font-body-lg text-on-surface" dir="rtl">
+    <div className="min-h-screen bg-background pb-40 flex flex-col font-body-lg text-on-surface" dir="rtl">
       <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] px-4 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
         <div className="w-full max-w-xl mx-auto flex justify-between items-center">
           <Link to="/dashboard" className="w-10 h-10 flex items-center justify-center rounded-xl text-primary hover:bg-primary-50 transition-colors active:scale-95">
