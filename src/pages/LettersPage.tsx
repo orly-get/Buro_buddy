@@ -80,9 +80,6 @@ export default function LettersPage() {
             </div>
             <span className="text-2xl font-black text-primary italic">BuroBuddy</span>
           </div>
-          <button className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-primary-50 transition-colors active:scale-95 duration-200">
-            <span className="material-symbols-outlined text-primary">notifications</span>
-          </button>
         </div>
       </header>
 
