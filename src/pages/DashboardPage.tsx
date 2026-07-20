@@ -78,7 +78,7 @@ export default function DashboardPage() {
     <div className="bg-background text-on-surface min-h-screen pb-32" dir="rtl">
       {/* TopAppBar */}
       <header className="px-6 py-4 w-full sticky top-0 z-50 bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] rounded-b-[32px]">
-        <div className="w-full max-w-4xl mx-auto flex justify-between items-center">
+        <div className="w-full max-w-2xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container bg-surface-container">
               <img 
@@ -87,11 +87,11 @@ export default function DashboardPage() {
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGKdpXtcpX86zfVi7qNTaz1VKkAakAo8WFbTosIHBA2RoE14ILQuKd6DIKvpw_IoGydAWTmhkvsDG3Vx2znYsLIBftxTBsjdbK9fCHeUIpb4OwueTCrvAlqUwheFHof41fXAilM1OM4G--rkOPgU2VStioo5WL-TgqTm8fxd37fLFqMwG0lc3NH6it4wOQzrc3he6xnIi9R2EEmP_w0WXLZq2_tfxSHSnnCvSXDYEthsp1C_9bN0tHhtRauA9EGiaveqGEWLNdGIU" 
               />
             </div>
-            <span className="text-2xl font-black text-@@@ italic">BuroBuddy</span>
+            <span className="text-2xl font-black text-primary italic">BuroBuddy</span>
           </div>
           <button 
             onClick={signOut}
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-50 text-@@@ hover:bg-primary-100 hover:text-error transition-colors active:scale-95 duration-200"
+            className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-50 text-primary hover:bg-primary-100 hover:text-error transition-colors active:scale-95 duration-200"
             title="התנתק"
           >
             <span className="material-symbols-outlined">logout</span>
@@ -99,7 +99,7 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <main className="page-enter px-5 pt-6 flex flex-col gap-6 max-w-4xl mx-auto">
+      <main className="page-enter px-5 pt-6 flex flex-col gap-6 max-w-2xl mx-auto">
         {/* Hero Section: Scan Letter */}
         <section className="relative overflow-hidden rounded-[32px] bg-white p-6 shadow-[0_10px_40px_rgba(255,107,138,0.1)] border border-primary-50">
           <div className="relative z-10">

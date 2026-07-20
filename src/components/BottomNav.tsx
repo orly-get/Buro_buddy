@@ -23,7 +23,7 @@ export default function BottomNav() {
   const activeTab = getActiveTab();
 
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full z-[999] flex justify-around items-center px-2 pb-8 pt-3 bg-white/95 backdrop-blur-lg rounded-t-[32px] border-t border-primary-100 shadow-[0_-10px_40px_rgba(173,44,78,0.15)]">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full md:w-fit md:bottom-5 z-[999] flex justify-around md:justify-center md:gap-2 items-center px-2 md:px-3 pb-8 md:pb-3 pt-3 bg-white/95 backdrop-blur-lg rounded-t-[32px] md:rounded-full border-t md:border border-primary-100 shadow-[0_-10px_40px_rgba(173,44,78,0.15)] md:shadow-[0_10px_40px_rgba(173,44,78,0.15)]">
       {navItems.map((item) => {
         const tabActive = activeTab === item.path;
         const navPath = item.path;

@@ -69,7 +69,7 @@ export default function LettersPage() {
   return (
     <div className="min-h-screen bg-background pb-32" dir="rtl">
       <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] px-6 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
-        <div className="w-full max-w-4xl mx-auto flex justify-between items-center">
+        <div className="w-full max-w-2xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
               {/* Generic placeholder profile image */}
@@ -79,15 +79,15 @@ export default function LettersPage() {
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGW6W4rQKt4Tc1IFi2vmdOL1vVj28FNwCW2_1l38_oMPHQ_4QaYmOzNZm0cXW67TqdSXTHQ28rCDS34bWi9OrZ9cRW5QsOAA174NtK9vC7QZFCEqzPdrx8im2RCKmhJEUm5zhQ3Kvn7DBwXAQ7FvT7N6yrvhcJT88QlYJG54JTUp_RGyqe7V0ws9SP-nGHFpuudcFiwMu1xLiKxXFfVXfWnAbsPsg5Le5R4oxPeSvsQ7N5LQd_7voEhxDUBA1BF90LZALLmJ4lik4"
               />
             </div>
-            <span className="text-2xl font-black text-@@@ italic">BuroBuddy</span>
+            <span className="text-2xl font-black text-primary italic">BuroBuddy</span>
           </div>
           <button className="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-primary-50 transition-colors active:scale-95 duration-200">
-            <span className="material-symbols-outlined text-@@@">notifications</span>
+            <span className="material-symbols-outlined text-primary">notifications</span>
           </button>
         </div>
       </header>
 
-      <main className="page-enter px-5 pt-8 max-w-4xl mx-auto">
+      <main className="page-enter px-5 pt-8 max-w-2xl mx-auto">
         <section className="mb-8 text-right">
           <h1 className="font-h1 text-h1 text-on-surface mb-2">המכתבים שלי</h1>
           <p className="font-body-sm text-body-sm text-on-surface-variant">

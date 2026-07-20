@@ -165,7 +165,7 @@ export default function LetterPage() {
           </Link>
           
           <div className="flex items-center gap-2">
-            <span className="text-xl font-black text-@@@ italic">BuroBuddy</span>
+            <span className="text-xl font-black text-primary italic">BuroBuddy</span>
           </div>
 
           <button 
