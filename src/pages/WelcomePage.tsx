@@ -15,28 +15,28 @@ export default function WelcomePage() {
   return (
     <div className="bg-background text-on-surface min-h-screen flex flex-col" dir="rtl">
       {/* Main Content Canvas */}
-      <main className="page-enter flex-1 px-margin-mobile py-lg flex flex-col items-center justify-center text-center lg:flex-row lg:gap-16 lg:max-w-5xl lg:mx-auto lg:text-right lg:py-0">
+      <main className="page-enter flex-1 px-margin-mobile py-lg flex flex-col items-center justify-center text-center md:flex-row md:gap-16 md:max-w-5xl md:mx-auto md:text-right md:my-10 md:p-12 md:bg-white md:rounded-[40px] md:shadow-[0_20px_60px_rgba(255,107,138,0.12)] md:border md:border-primary-50">
         {/* Illustration Container */}
-        <div className="relative w-full max-w-[240px] sm:max-w-sm aspect-square mb-md lg:mb-0 lg:max-w-md lg:w-1/2 lg:shrink-0 flex items-center justify-center">
+        <div className="relative w-full max-w-[240px] sm:max-w-sm aspect-square mb-md md:mb-0 md:max-w-md md:w-1/2 md:shrink-0 flex items-center justify-center">
           <div className="absolute inset-0 bg-primary-fixed-dim opacity-20 rounded-full blur-3xl"></div>
           <img
-            className="relative z-10 w-44 h-44 sm:w-64 sm:h-64 lg:w-72 lg:h-72 drop-shadow-xl"
+            className="relative z-10 w-44 h-44 sm:w-64 sm:h-64 md:w-72 md:h-72 drop-shadow-xl"
             alt="A friendly, rounded AI character with soft, squishy features and expressive digital eyes, designed in a modern 3D claymorphism style. The character is colored in soft whites and primary pink accents, holding a paper letter and smiling warmly. The setting is a bright, airy space with floating geometric shapes in pastel pinks. The mood is encouraging, helpful, and technologically sophisticated yet approachable."
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGKdpXtcpX86zfVi7qNTaz1VKkAakAo8WFbTosIHBA2RoE14ILQuKd6DIKvpw_IoGydAWTmhkvsDG3Vx2znYsLIBftxTBsjdbK9fCHeUIpb4OwueTCrvAlqUwheFHof41fXAilM1OM4G--rkOPgU2VStioo5WL-TgqTm8fxd37fLFqMwG0lc3NH6it4wOQzrc3he6xnIi9R2EEmP_w0WXLZq2_tfxSHSnnCvSXDYEthsp1C_9bN0tHhtRauA9EGiaveqGEWLNdGIU"
           />
         </div>
 
-        <div className="w-full flex flex-col items-center lg:items-end lg:w-1/2">
+        <div className="w-full flex flex-col items-center md:items-end md:w-1/2">
           {/* Headline & Copy */}
-          <div className="space-y-sm mb-md lg:mb-lg">
+          <div className="space-y-sm mb-md md:mb-lg">
             <h2 className="font-h1 text-h1 text-on-surface">בירוקרטיה? זה פשוט.</h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[280px] mx-auto lg:mx-0 lg:max-w-sm">
+            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-[280px] mx-auto md:mx-0 md:max-w-sm">
               אעזור לך לפענח מכתבים, לעקוב אחר מועדים ולנהל את הלחץ של הניירת.
             </p>
           </div>
 
           {/* Bento Grid Feature Highlight */}
-          <div className="grid grid-cols-2 gap-md w-full max-w-md mb-md lg:mb-lg">
+          <div className="grid grid-cols-2 gap-md w-full max-w-md mb-md md:mb-lg">
             <div className="bg-surface-container-lowest p-md rounded-[24px] shadow-[0_8px_20px_rgba(255,107,138,0.08)] flex flex-col items-start gap-xs text-right transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(255,107,138,0.14)]">
               <span className="material-symbols-outlined text-primary mb-xs" style={{ fontVariationSettings: "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24" }}>auto_awesome</span>
               <p className="font-caption text-caption text-on-surface font-bold">תרגום AI</p>
