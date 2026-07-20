@@ -104,6 +104,12 @@ Frontend (LetterPage)
 
 ---
 
+## How AI Was Used to Build This
+
+BuroBuddy was built with AI-assisted coding tools (Claude) as a pair-programming partner throughout development — scaffolding components, writing Supabase migrations and RLS policies, debugging, and reviewing code before commits. Every AI-generated change was reviewed and tested before merging.
+
+---
+
 ## Local Setup
 
 ### Prerequisites
