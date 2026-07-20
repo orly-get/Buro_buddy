@@ -160,12 +160,12 @@ export default function LetterPage() {
     <div className="min-h-screen bg-background pb-32 flex flex-col font-body-lg text-on-surface" dir="rtl">
       <header className="bg-white shadow-[0_8px_30px_rgb(255,107,138,0.12)] px-4 py-4 w-full sticky top-0 z-50 rounded-b-[32px]">
         <div className="w-full max-w-2xl mx-auto flex justify-between items-center">
-          <Link to="/letters" className="w-10 h-10 flex items-center justify-center rounded-xl text-primary hover:bg-pink-50 transition-colors active:scale-95">
+          <Link to="/letters" className="w-10 h-10 flex items-center justify-center rounded-xl text-primary hover:bg-primary-50 transition-colors active:scale-95">
             <span className="material-symbols-outlined">arrow_forward</span>
           </Link>
           
           <div className="flex items-center gap-2">
-            <span className="text-xl font-black text-pink-500 italic">BuroBuddy</span>
+            <span className="text-xl font-black text-@@@ italic">BuroBuddy</span>
           </div>
 
           <button 
@@ -178,7 +178,7 @@ export default function LetterPage() {
         </div>
       </header>
 
-      <main className="flex-1 px-5 py-6 space-y-6 max-w-2xl mx-auto w-full">
+      <main className="page-enter flex-1 px-5 py-6 space-y-6 max-w-2xl mx-auto w-full">
         
         {/* Processing State Indicator */}
         {letter.status === 'processing' && (
@@ -221,7 +221,7 @@ export default function LetterPage() {
               <div className="w-12 h-12 bg-primary-container rounded-2xl flex items-center justify-center shadow-lg shrink-0">
                 <span className="material-symbols-outlined text-white text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>smart_toy</span>
               </div>
-              <div className="bg-white p-4 rounded-t-3xl rounded-bl-3xl shadow-[0_10px_30px_rgba(255,107,138,0.1)] border border-pink-50 relative w-full">
+              <div className="bg-white p-4 rounded-t-3xl rounded-bl-3xl shadow-[0_10px_30px_rgba(255,107,138,0.1)] border border-primary-50 relative w-full">
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <div className="flex items-center gap-2">
                     <span className="font-h2 text-primary">BuroBuddy אומר</span>
@@ -249,7 +249,7 @@ export default function LetterPage() {
 
 
         {/* Key Action Items Card */}
-        <section className="bg-white rounded-[32px] p-6 shadow-[0_20px_50px_rgba(255,107,138,0.08)] border border-pink-50 space-y-6">
+        <section className="bg-white rounded-[32px] p-6 shadow-[0_20px_50px_rgba(255,107,138,0.08)] border border-primary-50 space-y-6">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>checklist</span>
@@ -268,13 +268,13 @@ export default function LetterPage() {
               tasks.map((task) => {
                 const dueStatus = getDueDateStatus(task.due_date);
                 return (
-                  <label key={task.id} className="flex items-start gap-4 p-4 rounded-2xl bg-surface-container-low hover:bg-pink-50 transition-colors cursor-pointer group">
+                  <label key={task.id} className="flex items-start gap-4 p-4 rounded-2xl bg-surface-container-low hover:bg-primary-50 transition-colors cursor-pointer group">
                     <div className="relative flex items-center justify-center mt-1">
                       <input 
                         type="checkbox" 
                         checked={task.is_completed}
                         onChange={() => toggleTask(task.id, task.is_completed)}
-                        className="peer appearance-none w-6 h-6 rounded-lg border-2 border-pink-200 checked:bg-primary checked:border-primary transition-all duration-200" 
+                        className="peer appearance-none w-6 h-6 rounded-lg border-2 border-primary-200 checked:bg-primary checked:border-primary transition-all duration-200" 
                       />
                       <span className="material-symbols-outlined absolute text-white text-[18px] opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none">check</span>
                     </div>
@@ -294,7 +294,7 @@ export default function LetterPage() {
         </section>
 
         {letter.original_text && (
-          <details className="bg-white rounded-2xl p-6 shadow-[0_10px_30px_rgba(255,107,138,0.08)] border border-pink-50 group">
+          <details className="bg-white rounded-2xl p-6 shadow-[0_10px_30px_rgba(255,107,138,0.08)] border border-primary-50 group">
             <summary className="cursor-pointer flex items-center justify-between font-h2 text-on-surface hover:text-primary transition-colors outline-none list-none">
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-primary">text_snippet</span>
@@ -302,7 +302,7 @@ export default function LetterPage() {
               </div>
               <span className="material-symbols-outlined text-on-surface-variant group-open:rotate-180 transition-transform">expand_more</span>
             </summary>
-            <p className="font-body-sm text-on-surface-variant whitespace-pre-wrap border-t border-pink-100 pt-4 mt-4 leading-relaxed">
+            <p className="font-body-sm text-on-surface-variant whitespace-pre-wrap border-t border-primary-100 pt-4 mt-4 leading-relaxed">
               {letter.original_text}
             </p>
           </details>

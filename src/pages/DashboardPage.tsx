@@ -87,11 +87,11 @@ export default function DashboardPage() {
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGKdpXtcpX86zfVi7qNTaz1VKkAakAo8WFbTosIHBA2RoE14ILQuKd6DIKvpw_IoGydAWTmhkvsDG3Vx2znYsLIBftxTBsjdbK9fCHeUIpb4OwueTCrvAlqUwheFHof41fXAilM1OM4G--rkOPgU2VStioo5WL-TgqTm8fxd37fLFqMwG0lc3NH6it4wOQzrc3he6xnIi9R2EEmP_w0WXLZq2_tfxSHSnnCvSXDYEthsp1C_9bN0tHhtRauA9EGiaveqGEWLNdGIU" 
               />
             </div>
-            <span className="text-2xl font-black text-pink-500 italic">BuroBuddy</span>
+            <span className="text-2xl font-black text-@@@ italic">BuroBuddy</span>
           </div>
           <button 
             onClick={signOut}
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-pink-50 text-pink-500 hover:bg-pink-100 hover:text-error transition-colors active:scale-95 duration-200"
+            className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-50 text-@@@ hover:bg-primary-100 hover:text-error transition-colors active:scale-95 duration-200"
             title="התנתק"
           >
             <span className="material-symbols-outlined">logout</span>
@@ -99,15 +99,15 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <main className="px-5 pt-6 flex flex-col gap-6 max-w-4xl mx-auto">
+      <main className="page-enter px-5 pt-6 flex flex-col gap-6 max-w-4xl mx-auto">
         {/* Hero Section: Scan Letter */}
-        <section className="relative overflow-hidden rounded-[32px] bg-white p-6 shadow-[0_10px_40px_rgba(255,107,138,0.1)] border border-pink-50">
+        <section className="relative overflow-hidden rounded-[32px] bg-white p-6 shadow-[0_10px_40px_rgba(255,107,138,0.1)] border border-primary-50">
           <div className="relative z-10">
             <h1 className="font-h1 text-h1 text-on-surface mb-1">שלום {firstName}, טוב לראות אותך</h1>
             <p className="font-body-sm text-body-sm text-on-surface-variant mb-6">מוכן לטפל בניירת שלך היום?</p>
             <Link 
               to="/upload" 
-              className="group w-full h-[180px] bg-primary-container rounded-3xl flex flex-col items-center justify-center gap-2 text-on-primary shadow-[0_20px_50px_rgba(255,107,138,0.3)] active:scale-[0.98] transition-all duration-200"
+              className="group w-full h-[180px] bg-primary-container rounded-3xl flex flex-col items-center justify-center gap-2 text-on-primary shadow-[0_20px_50px_rgba(255,107,138,0.3)] hover:shadow-[0_24px_60px_rgba(255,107,138,0.4)] hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
               style={{ textDecoration: 'none' }}
             >
               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-1">
@@ -130,7 +130,7 @@ export default function DashboardPage() {
           
           <div className="space-y-4">
             {recentLetters.length === 0 ? (
-              <div className="bg-white p-6 rounded-2xl border border-pink-50 shadow-[0_4px_15px_rgba(255,107,138,0.05)] text-center">
+              <div className="bg-white p-6 rounded-2xl border border-primary-50 shadow-[0_4px_15px_rgba(255,107,138,0.05)] text-center">
                 <p className="font-body-sm text-on-surface-variant">אין מכתבים להצגה</p>
               </div>
             ) : (
@@ -138,7 +138,7 @@ export default function DashboardPage() {
                 <Link 
                   to={`/letter/${letter.id}`} 
                   key={letter.id}
-                  className={`bg-white p-4 rounded-2xl border border-pink-50 shadow-[0_4px_15px_rgba(255,107,138,0.05)] flex items-center gap-4 transition-all active:scale-[0.98] ${letter.status === 'completed' ? 'opacity-70' : ''}`}
+                  className={`bg-white p-4 rounded-2xl border border-primary-50 shadow-[0_4px_15px_rgba(255,107,138,0.05)] flex items-center gap-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(255,107,138,0.12)] active:scale-[0.98] ${letter.status === 'completed' ? 'opacity-70' : ''}`}
                   style={{ textDecoration: 'none' }}
                 >
                   <div className="w-12 h-12 bg-surface-container rounded-xl flex items-center justify-center overflow-hidden flex-shrink-0">

@@ -14,9 +14,9 @@ export default function ProfilePage() {
         </div>
       </header>
 
-      <main className="flex-1 max-w-xl mx-auto px-5 py-6 space-y-6 w-full">
+      <main className="page-enter flex-1 max-w-xl mx-auto px-5 py-6 space-y-6 w-full">
         {/* Profile Card */}
-        <div className="bg-white rounded-[32px] p-8 shadow-[0_10px_40px_rgba(255,107,138,0.1)] border border-pink-50 flex flex-col items-center text-center">
+        <div className="bg-white rounded-[32px] p-8 shadow-[0_10px_40px_rgba(255,107,138,0.1)] border border-primary-50 flex flex-col items-center text-center">
           <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary-container bg-surface-container shadow-lg mb-4">
             <img 
               alt="פרופיל משתמש" 
@@ -37,13 +37,13 @@ export default function ProfilePage() {
         </div>
 
         {/* Support Section */}
-        <section className="bg-white rounded-[32px] p-6 shadow-[0_10px_30px_rgba(255,107,138,0.08)] border border-pink-50">
+        <section className="bg-white rounded-[32px] p-6 shadow-[0_10px_30px_rgba(255,107,138,0.08)] border border-primary-50">
           <div className="flex items-center gap-2 mb-4">
             <span className="material-symbols-outlined text-tertiary" style={{ fontVariationSettings: "'FILL' 1" }}>help</span>
             <h3 className="font-h2 text-on-surface">צריכים עזרה?</h3>
           </div>
           <div className="space-y-3">
-            <a href="mailto:support@burobuddy.com" className="flex items-center gap-3 p-3 rounded-2xl hover:bg-pink-50 transition-colors">
+            <a href="mailto:support@burobuddy.com" className="flex items-center gap-3 p-3 rounded-2xl hover:bg-primary-50 transition-colors">
               <div className="w-10 h-10 bg-secondary-container/20 text-secondary rounded-full flex items-center justify-center">
                 <span className="material-symbols-outlined text-[20px]">mail</span>
               </div>

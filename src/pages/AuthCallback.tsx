@@ -48,10 +48,10 @@ export default function AuthCallback() {
   }, [user, loading, navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50" dir="rtl">
+    <div className="min-h-screen flex items-center justify-center bg-background" dir="rtl">
       <div className="flex flex-col items-center gap-4">
-        <div className="w-10 h-10 border-4 border-slate-300 border-t-slate-600 rounded-full animate-spin" />
-        <p className="text-slate-600 font-medium">מתחבר למערכת...</p>
+        <div className="w-10 h-10 border-4 border-primary-100 border-t-primary rounded-full animate-spin" />
+        <p className="text-on-surface-variant font-medium">מתחבר למערכת...</p>
       </div>
     </div>
   );
